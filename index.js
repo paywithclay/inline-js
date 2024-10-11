@@ -3,36 +3,56 @@ class Clay {
   constructor(amount, currency, key) {
     this.amount = amount;
     this.currency = currency;
-    this.key = key; // This should be your public key
+    this.key = key;
   }
 
   pay() {
-    // Open an empty popup window
-    const popup = window.open("", "PaymentPopup", "width=600,height=400");
+    // Implement the payment logic here
+    // For demonstration, just logging the payment details
+    console.log(
+      `Initiating payment of ${this.amount} ${this.currency} using key: ${this.key}`
+    );
 
-    // You can optionally add content to the popup if needed
-    if (popup) {
-      popup.document.write(`
-        <html>
-          <head>
-            <title>Payment</title>
-          </head>
-          <body>
-            <h1>Processing Payment</h1>
-            <p>Amount: ${this.amount} ${this.currency}</p>
-          </body>
-        </html>
-      `);
-      popup.document.close(); // Close the document to finish loading
-    } else {
-      console.log("Popup blocked or failed to open.");
-    }
+    // Call your payment gateway API here, e.g., Paystack, Flutterwave, etc.
+    // This is where you would normally handle the payment logic
+  }
+
+  createPaymentModal() {
+    const modal = document.createElement("div");
+    modal.className = "clay-modal";
+    modal.innerHTML = `
+      <div class="clay-modal-content">
+        <span class="clay-close">&times;</span>
+        <h2>Payment</h2>
+        <p>Amount: ${this.amount} ${this.currency}</p>
+        <button id="clay-confirm-button">Confirm Payment</button>
+      </div>
+    `;
+
+    // Close modal functionality
+    const closeButton = modal.querySelector(".clay-close");
+    closeButton.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    // Confirm payment button functionality
+    const confirmButton = modal.querySelector("#clay-confirm-button");
+    confirmButton.onclick = () => {
+      this.pay();
+      modal.style.display = "none"; // Close the modal after payment
+    };
+
+    // Append modal to the body
+    document.body.appendChild(modal);
+
+    // Display the modal
+    modal.style.display = "block";
   }
 
   createPaymentButton() {
     const button = document.createElement("button");
     button.innerText = `Pay ${this.amount} ${this.currency}`;
-    button.onclick = () => this.pay();
+    button.onclick = () => this.createPaymentModal();
     return button;
   }
 }
