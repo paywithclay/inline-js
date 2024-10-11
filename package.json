@@ -1,0 +1,31 @@
+{
+  "name": "@paywithclay/inline-js",
+  "version": "1.0.0",
+  "description": "The Friendly Payment Gateway for Developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paywithclay/inline-js.git"
+  },
+  "keywords": [
+    "payment",
+    "gateway",
+    "integration",
+    "javascript",
+    "api",
+    "checkout",
+    "payments",
+    "ecommerce",
+    "developer",
+    "inline"
+  ],
+  "author": "Favour Afula",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paywithclay/inline-js/issues"
+  },
+  "homepage": "https://github.com/paywithclay/inline-js#readme"
+}
