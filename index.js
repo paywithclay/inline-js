@@ -43,4 +43,4 @@ if (typeof window !== "undefined") {
 }
 
 // Export for Node.js
-export default Clay;
+module.exports = Clay;
