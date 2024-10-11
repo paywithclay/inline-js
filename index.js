@@ -3,15 +3,30 @@ class Clay {
   constructor(amount, currency, key) {
     this.amount = amount;
     this.currency = currency;
-    this.key = key;
+    this.key = key; // This should be your public key
   }
 
   pay() {
-    // Implement the payment logic here
-    // For demonstration, just logging the payment details
-    console.log(
-      `Initiating payment of ${this.amount} ${this.currency} using key: ${this.key}`
-    );
+    // Open an empty popup window
+    const popup = window.open("", "PaymentPopup", "width=600,height=400");
+
+    // You can optionally add content to the popup if needed
+    if (popup) {
+      popup.document.write(`
+        <html>
+          <head>
+            <title>Payment</title>
+          </head>
+          <body>
+            <h1>Processing Payment</h1>
+            <p>Amount: ${this.amount} ${this.currency}</p>
+          </body>
+        </html>
+      `);
+      popup.document.close(); // Close the document to finish loading
+    } else {
+      console.log("Popup blocked or failed to open.");
+    }
   }
 
   createPaymentButton() {
@@ -28,4 +43,4 @@ if (typeof window !== "undefined") {
 }
 
 // Export for Node.js
-module.exports = Clay;
+export default Clay;
