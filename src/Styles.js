@@ -1,0 +1,196 @@
+export function addStyles() {
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .clay-modal {
+      z-index: 1001;
+      background-color: #fefefe; /* Light mode background */
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
+      opacity: 0; /* Start hidden */
+      font-family: 'Fredoka', sans-serif; /* Apply Google Font */
+    }
+
+    .clay-modal.mobile {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: auto;
+      border-radius: 30px 30px 0 0; /* Rounded top corners */
+      left: 0;
+      bottom: 0; /* Position at the bottom for mobile */
+    }
+
+    .clay-modal.desktop {
+      display: flex;
+      position: fixed;
+      top: 50%; /* Center vertically */
+      left: 50%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Adjust position to truly center */
+      width: 400px; /* Set a fixed width for the desktop modal */
+      border-radius: 30px; /* Rounded corners */
+      z-index: 1001; /* Ensure it's above other elements */
+    }
+
+    .clay-modal.show {
+      transform: translateY(0); /* Slide in */
+      opacity: 1; /* Fade in */
+    }
+
+    /* Light mode styles */
+    .clay-modal.light {
+      background-color: #fefefe; /* Light mode background */
+      color: #000; /* Light mode text color */
+    }
+
+    /* Dark mode styles */
+    .clay-modal.dark {
+      background-color: #191a1a; /* Dark mode background */
+      color: #fff; /* Dark mode text color */
+    }
+
+    .modal-title {
+      color: inherit; /* Use current text color */
+      font-size: 20px; /* Set font size */
+      font-weight: bold; /* Make the title bold */
+      text-align: center; /* Center the text */
+      margin: 5px 0; /* Add margin for spacing */
+    }
+
+    /* Close button styles */
+    .clay-close {
+      color: inherit; /* Use current text color */
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    /* Modal header styles */
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Modal icon styles */
+    .modal-icon {
+      color: inherit; /* Use current text color */
+    }
+
+    /* Media query to handle responsive behavior */
+    @media (max-width: 768px) {
+      .clay-modal.desktop {
+        display: none; /* Hide desktop modal on mobile */
+      }
+    }
+
+    @media (min-width: 769px) {
+      .clay-modal.mobile {
+        display: none; /* Hide mobile modal on desktop */
+      }
+    }
+
+    .clay-modal-content {
+      padding: 20px;
+    }
+
+    .lds-ripple,
+    .lds-ripple div {
+      box-sizing: border-box;
+    }
+
+    .lds-ripple {
+      display: inline-block;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      z-index: 1000; /* Above shadow */
+    }
+
+    .lds-ripple div {
+      position: absolute;
+      border: 4px solid currentColor;
+      opacity: 1;
+      border-radius: 50%;
+      animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+    .lds-ripple div:nth-child(2) {
+      animation-delay: -0.5s;
+    }
+
+    .wallet-options {
+      margin-top: 20px;
+    }
+
+    .wallet-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #1e1e1e; /* Dark background color for each option */
+      border-radius: 10px; /* Rounded corners */
+      margin-bottom: 10px; /* Space between options */
+      transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+      cursor: pointer; /* Change cursor to pointer when hovering over the wallet option */
+    }
+
+    .wallet-option:hover {
+      background-color: #252626; /* Glow effect on hover */
+    }
+
+    .wallet-option img {
+      width: 30px; /* Adjust size as needed */
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .checkmark {
+      color: green; /* Style for the checkmark */
+    }
+
+    @keyframes lds-ripple {
+      0% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 0;
+      }
+      4.9% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 0;
+      }
+      5% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 1;
+      }
+      100% {
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+      }
+    }
+
+    .shadow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); /* Shadow covering entire page */
+      z-index: 1000; /* Below loading and modal */
+    }
+  `;
+  document.head.appendChild(style);
+}
