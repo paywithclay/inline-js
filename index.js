@@ -24,20 +24,7 @@ class Clay {
         <button id="clay-confirm-button">Confirm Payment</button>
       </div>`;
 
-    // Gesture handling
-    let startY;
-    m.addEventListener("touchstart", (e) => {
-      startY = e.touches[0].clientY;
-    });
-
-    m.addEventListener("touchmove", (e) => {
-      const moveY = e.touches[0].clientY;
-      if (moveY - startY > 50) {
-        // Swipe down
-        this.closeModal(m);
-      }
-    });
-
+    // Removed gesture handling
     m.querySelector(".clay-close").onclick = () => {
       this.closeModal(m);
     };
@@ -48,8 +35,7 @@ class Clay {
     };
 
     document.body.appendChild(m);
-    m.style.display = "block";
-    setTimeout(() => m.classList.add("show"), 10); // Trigger animation
+    m.style.display = "block"; // Show modal immediately
   }
 
   showLoading() {
@@ -71,12 +57,9 @@ class Clay {
   }
 
   closeModal(modal) {
-    modal.classList.remove("show"); // Remove animation class
-    setTimeout(() => {
-      modal.style.display = "none";
-      modal.remove(); // Remove modal from DOM
-      this.removeLoading(); // Remove loading indicator and shadow
-    }, 300); // Match duration of CSS transition
+    modal.style.display = "none"; // Hide modal immediately
+    modal.remove(); // Remove modal from DOM
+    this.removeLoading(); // Remove loading indicator and shadow
   }
 
   removeLoading() {
@@ -119,11 +102,6 @@ class Clay {
         background-color: #fefefe;
         border-radius: 30px 30px 0 0;
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease; /* Added transition */
-        transform: translateY(100%); /* Start off-screen */
-      }
-      .clay-modal.show {
-        transform: translateY(0); /* Slide in */
       }
       .clay-modal.dark {
         background-color: #333; /* Dark mode background */
