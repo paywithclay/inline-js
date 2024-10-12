@@ -23,8 +23,8 @@ export default class Modal {
           <span class="modal-icon clay-close" style="cursor: pointer;">[CLOSE SVG]</span>
         </div>
         <div class="wallet-options">
-          <div class="wallet-option"><img src="path/to/walletconnect.png" alt="WalletConnect"/><span>WalletConnect</span></div>
-          <div class="wallet-option"><img src="path/to/phantom.png" alt="Phantom"/><span>Phantom</span></div>
+          <div class="wallet-option"><span>WalletConnect</span></div>
+          <div class="wallet-option"><span>Phantom</span></div>
         </div>
       </div>`;
 
