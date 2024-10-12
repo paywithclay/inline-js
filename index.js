@@ -1,7 +1,9 @@
 class Clay {
   constructor(a, c, k, mode = "light") {
     // Added mode parameter
-    (this.amount = a), (this.currency = c), (this.key = k);
+    this.amount = a;
+    this.currency = c;
+    this.key = k;
     this.mode = mode; // Store mode
     this.addStyles();
   }
@@ -22,7 +24,7 @@ class Clay {
 
   createMobilePaymentModal() {
     const m = document.createElement("div");
-    m.className = `clay-modal ${this.mode}`; // Apply mode class
+    m.className = `clay-modal mobile ${this.mode}`; // Apply mode class
     m.innerHTML = `
       <div class="clay-modal-content">
         <span class="clay-close">&times;</span>
@@ -61,7 +63,7 @@ class Clay {
 
   createDesktopPaymentModal() {
     const m = document.createElement("div");
-    m.className = `clay-modal ${this.mode}`; // Apply mode class
+    m.className = `clay-modal desktop ${this.mode}`; // Apply mode class
     m.innerHTML = `
       <div class="clay-modal-content">
         <span class="clay-close">&times;</span>
@@ -144,9 +146,6 @@ class Clay {
         display: none;
         position: fixed;
         z-index: 1001;
-        left: 50%; /* Center horizontally */
-        top: 50%; /* Center vertically */
-        transform: translate(-50%, -50%); /* Adjust for centering */
         width: 100%;
         height: auto;
         background-color: #fefefe; /* Light mode background */
@@ -154,16 +153,28 @@ class Clay {
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease; /* Added transition */
       }
+      .clay-modal.mobile {
+        left: 0;
+        bottom: 0; /* Position at the bottom for mobile */
+        border-radius: 30px 30px 0 0; /* Rounded top corners */
+      }
+      .clay-modal.desktop {
+        left: 50%; /* Center horizontally */
+        top: 50%; /* Center vertically */
+        transform: translate(-50%, -50%); /* Adjust for centering */
+        width: 400px; /* Set a fixed width for the desktop modal */
+        border-radius: 10px; /* Rounded corners for desktop */
+      }
       .clay-modal.dark {
         background-color: #333; /* Dark mode background */
         color: #fff; /* Dark mode text color */
       }
       .clay-modal.show {
-        transform: translate(-50%, -50%) translateY(0); /* Slide in */
+        transform: translateY(0); /* Slide in */
       }
-       @media (min-width: 768px) {
-        .clay-modal {
-          width: 400px; /* Set a fixed width for the popup */
+      @media (min-width: 768px) {
+        .clay-modal.desktop {
+          width: 400px; /* Set a fixed width for the desktop modal */
         }
       }
       .clay-modal-content {
