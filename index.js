@@ -134,7 +134,7 @@ class Clay {
         transform: translate(-50%, -50%);
         width: 80px;
         height: 80px;
-        z-index: 1002; /* Above shadow */
+        z-index: 100; /* Above shadow */
       }
       .lds-ripple div {
         position: absolute;
@@ -183,7 +183,7 @@ class Clay {
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.7); /* Shadow covering entire page */
-        z-index: 1000; /* Below loading and modal */
+        z-index: 200; /* Below loading and modal */
       }
     `;
     document.head.appendChild(style);
