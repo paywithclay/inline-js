@@ -216,23 +216,11 @@ const ClayPay = ({ amount, mode = "light", key, currency }) => {
   );
 };
 
-// Universal ClayPay function for non-React usage
-const clayPay = ({ amount, mode = "light", key, currency }) => {
-  const paymentButton = new Clay(
-    amount,
-    currency,
-    key,
-    mode
-  ).createPaymentButton();
-  document.body.appendChild(paymentButton);
-};
-
 // Expose Clay and ClayPay to the global window object
 if (typeof window !== "undefined") {
   window.Clay = Clay;
   window.ClayPay = ClayPay; // Expose ClayPay to the global window object
-  window.clayPay = clayPay; // Expose universal clayPay function
 }
 
 // Exporting for module systems
-module.exports = { Clay, ClayPay, clayPay };
+module.exports = { Clay, ClayPay };
