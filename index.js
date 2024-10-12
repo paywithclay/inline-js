@@ -174,7 +174,7 @@ class Clay {
 
       /* Dark mode styles */
       .clay-modal.dark {
-        background-color: #333; /* Dark mode background */
+        background-color: #191a1a; /* Dark mode background */
         color: #fff; /* Dark mode text color */
       }
 
