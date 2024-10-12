@@ -93,6 +93,18 @@ class Clay {
     return b;
   }
 
+  // New method to render the payment button directly
+  renderPaymentButton(containerId) {
+    const button = this.createPaymentButton();
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = ""; // Clear previous content
+      container.appendChild(button);
+    } else {
+      console.error(`Container with ID ${containerId} not found.`);
+    }
+  }
+
   addStyles() {
     const style = document.createElement("style");
     style.innerHTML = `
