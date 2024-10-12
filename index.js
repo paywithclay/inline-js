@@ -156,20 +156,19 @@ class Clay {
         bottom: 0; /* Position at the bottom for mobile */
         border-radius: 30px 30px 0 0; /* Rounded top corners */
       }
-    .clay-modal.desktop {
-      display: none;
-      position: fixed;
-      z-index: 1001;
-      left: 50%; /* Center horizontally */
-      top: 50%; /* Center vertically */
-      transform: translate(-50%, -50%); /* Adjust to center */
-      width: 400px; /* Set a fixed width for the desktop modal */
-      height: auto;
-      background-color: #fefefe; /* Light mode background */
-      border-radius: 30px; /* Rounded corners */
-      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease; /* Added transition */
-    }
+      .clay-modal.desktop {
+        display: none;
+        position: fixed;
+        z-index: 1001;
+        left: 40%; /* Center horizontally */
+        top: 50%; /* Center vertically */
+        width: 400px; /* Set a fixed width for the desktop modal */
+        height: auto;
+        background-color: #fefefe; /* Light mode background */
+        border-radius: 30px; /* Rounded corners */
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease; /* Added transition */
+      }
       .clay-modal.dark {
         background-color: #333; /* Dark mode background */
         color: #fff; /* Dark mode text color */
