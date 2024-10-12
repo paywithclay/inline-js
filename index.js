@@ -28,6 +28,7 @@ class Clay {
           window.innerWidth < 768 ? "mobile" : "desktop"
         } mode.`
       );
+      this.trackEvent("MODAL_OPEN"); // Track modal open event
     }
   }
 
@@ -142,6 +143,7 @@ class Clay {
       this.currentModal = null; // Reset current modal
       this.removeLoading(); // Remove loading indicator and shadow
       console.log(`Modal closed in ${isMobile ? "mobile" : "desktop"} mode.`);
+      this.trackEvent("MODAL_CLOSE"); // Track modal close event
     }, 300); // Match duration of CSS transition
   }
 
@@ -334,6 +336,52 @@ class Clay {
       }
     `;
     document.head.appendChild(style);
+  }
+
+  trackEvent(event) {
+    const eventId = this.generateEventId();
+    const url = window.location.href;
+    const domain = window.location.hostname;
+    const timestamp = Date.now();
+
+    const trackingData = {
+      eventId: eventId,
+      url: url,
+      domain: domain,
+      timestamp: timestamp,
+      props: {
+        type: "track",
+        event: event,
+      },
+    };
+
+    // Send tracking data to the specified URL
+    fetch("https://pulse.walletconnect.com/e", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(trackingData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error("Tracking event failed:", response.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending tracking event:", error);
+      });
+  }
+
+  generateEventId() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
   }
 }
 
