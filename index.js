@@ -39,7 +39,7 @@ class Clay {
     m.innerHTML = `
       <div class="clay-modal-content">
         <div class="modal-header">
-          <span class="modal-icon">
+          <span class="modal-icon" style="cursor: pointer;">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
               <g fill="none" stroke="currentColor" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-width="2"/>
@@ -53,24 +53,46 @@ class Clay {
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="m8.4 17l3.6-3.6l3.6 3.6l1.4-1.4l-3.6-3.6L17 8.4L15.6 7L12 10.6L8.4 7L7 8.4l3.6 3.6L7 15.6zm3.6 5q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg>
           </span> <!-- Added close button -->
         </div>
-        <div class="wallet-options">
+        <div class="loading-spinner" style="display: flex; justify-content: center; align-items: center; height: 100px; margin-top: 40px;">
+          <div class="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="wallet-options" style="display: none;">
           <div class="wallet-option">
-            <img src="path/to/walletconnect-icon.png" alt="WalletConnect" />
-            <span>WalletConnect</span>
-            <button>QR CODE</button>
+            <img src="https://cdn.dribbble.com/userupload/13343614/file/original-d9d4912436391b57e1861c93d94ae105.jpg" alt="WalletConnect" />
+            <span>Clay Scan</span>
+            <div class="qr-code">QR CODE</div>
           </div>
           <div class="wallet-option">
-            <img src="path/to/phantom-icon.png" alt="Phantom" />
-            <span>Phantom</span>
-            <span class="checkmark">✔️</span>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQApU1W4AukdeecItSYUAnaupxpTxdmevCRPg&s" alt="Paystack" />
+            <span>Paystack</span>
           </div>
           <div class="wallet-option">
-            <img src="path/to/trust-wallet-icon.png" alt="Trust Wallet" />
-            <span>Trust Wallet</span>
-            <span class="checkmark">✔️</span>
+            <img src="https://www.fintechfutures.com/files/2023/03/Flutterwave-new.jpg" alt="Flutterwave" />
+            <span>Flutterwave</span>
+          </div>
+          <div class="wallet-option">
+            <img src="https://pbs.twimg.com/profile_images/1445317527173804034/KQFHzQWE_400x400.png" alt="Mono" />
+            <span>Mono</span>
+          </div>
+          <div class="wallet-option">
+            <img src="https://fincra.com/wp-content/uploads/2022/10/cropped-Favicon.png" alt="Fincra" />
+            <span>Fincra</span>
+          </div>
+          <div class="wallet-option">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4L0GRpBv2Ax97bi8-NOhGouVcn4OqUW0tYQ&s" alt="PawaPay" />
+            <span>PawaPay</span>
           </div>
         </div>
       </div>`;
+
+    // Show wallet options after 5 seconds
+    setTimeout(() => {
+      m.querySelector(".loading-spinner").style.display = "none";
+      m.querySelector(".wallet-options").style.display = "block";
+    }, 500);
 
     // Gesture handling
     this.gestureController.addGestureHandlers(m, this.closeModal.bind(this, m));
@@ -145,6 +167,7 @@ class Clay {
   }
 
   showModal(modal) {
+    this.removeLoading();
     modal.style.display = "block";
     setTimeout(() => modal.classList.add("show"), 10); // Trigger animation
   }
@@ -164,7 +187,7 @@ class Clay {
       modal.style.display = "none";
       modal.remove(); // Remove modal from DOM
       this.currentModal = null; // Reset current modal
-      this.removeLoading(); // Remove loading indicator and shadow
+      this.removeShadow();
       console.log(`Modal closed in ${isMobile ? "mobile" : "desktop"} mode.`);
       this.trackEvent("MODAL_CLOSE"); // Track modal close event
     }, 300); // Match duration of CSS transition
@@ -172,9 +195,12 @@ class Clay {
 
   removeLoading() {
     const loading = document.querySelector(".lds-ripple");
-    const shadow = document.querySelector(".shadow");
     if (loading) loading.remove(); // Remove loading indicator
-    if (shadow) shadow.remove(); // Remove shadow
+  }
+
+  removeShadow() {
+    const shadow = document.querySelector(".shadow");
+    if (shadow) shadow.remove();
   }
 
   createPaymentButton() {
@@ -349,9 +375,9 @@ class Clay {
 }
 
 .wallet-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Align items to the left */
   padding: 10px;
   background-color: #1e1e1e; /* Dark background color for each option */
   border-radius: 10px; /* Rounded corners */
@@ -360,15 +386,36 @@ class Clay {
   cursor: pointer; /* Change cursor to pointer when hovering over the wallet option */
 }
 
+.qr-code {
+  margin-left: auto; /* Push the button to the right */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #243140; /* Button background color */
+  color: #408bd9; /* Button text color */
+  border-color: #243140; /* Make border color same as background */
+  font-size: 0.6em; /* Reduce text size */
+  padding: 8px 12px; /* Add good padding */
+  font-weight: bold; /* Make text bold */
+  font-family: 'Fredoka', sans-serif; /* Apply Google Font */
+}
+
 .wallet-option:hover {
   background-color: #252626; /* Glow effect on hover */
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.2); /* Very subtle glowing effect on hover */
 }
 
 .wallet-option img {
   width: 30px; /* Adjust size as needed */
   height: 30px;
   margin-right: 10px;
+  border-radius: 6px; /* Make the image rounded */
+  transition: box-shadow 0.3s ease; /* Smooth transition for the glow effect */
 }
+
+.wallet-option img:hover {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.4); /* Reduced glowing effect on hover */
+}
+
+
 
 .checkmark {
   color: green; /* Style for the checkmark */
