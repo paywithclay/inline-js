@@ -207,9 +207,6 @@ class Clay {
   addStyles() {
     const style = document.createElement("style");
     style.innerHTML = `
-      /* Link to Google Fonts */
-      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap');
-
       .clay-modal {
         display: none;
         position: fixed;
@@ -218,12 +215,48 @@ class Clay {
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
         opacity: 0; /* Start hidden */
-        font-family: 'Fredoka', sans-serif; /* Apply Fredoka font */
       }
 
-      .modal-title {
-        font-family: 'Fredoka', sans-serif; /* Apply Fredoka font to title */
+      .clay-modal.mobile {
+        width: 100%;
+        height: auto;
+        border-radius: 30px 30px 0 0; /* Rounded top corners */
+        left: 0;
+        bottom: 0; /* Position at the bottom for mobile */
       }
+
+      .clay-modal.desktop {
+        width: 400px; /* Set a fixed width for the desktop modal */
+        left: 30%; /* Center horizontally */
+        top: 40%; /* Center vertically */
+        border-radius: 30px; /* Rounded corners */
+      }
+
+      .clay-modal.show {
+        transform: translateY(0); /* Slide in */
+        opacity: 1; /* Fade in */
+      }
+
+      /* Light mode styles */
+      .clay-modal.light {
+        background-color: #fefefe; /* Light mode background */
+        color: #000; /* Light mode text color */
+      }
+
+      /* Dark mode styles */
+      .clay-modal.dark {
+        background-color: #191a1a; /* Dark mode background */
+        color: #fff; /* Dark mode text color */
+      }
+
+       .modal-title {
+        color: inherit; /* Use current text color */
+        font-size: 24px; /* Set font size */
+        font-weight: bold; /* Make the title bold */
+        text-align: center; /* Center the text */
+        margin: 10px 0; /* Add margin for spacing */
+      }
+
       /* Close button styles */
       .clay-close {
         color: inherit; /* Use current text color */
