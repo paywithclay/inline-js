@@ -20,11 +20,10 @@ class Clay {
         <h2>Payment</h2>
         <p>Amount: ${this.amount} ${this.currency}</p>
         <button id="clay-confirm-button">Confirm Payment</button>
-        <div id="loading" class="loading" style="display: none;">Loading...</div>
       </div>`;
 
     m.querySelector(".clay-close").onclick = () => {
-      m.style.display = "none";
+      this.closeModal(m);
     };
 
     m.querySelector("#clay-confirm-button").onclick = () => {
@@ -36,13 +35,27 @@ class Clay {
   }
 
   showLoading(modal) {
-    const loading = modal.querySelector("#loading");
-    loading.style.display = "block"; // Show loading indicator
+    const loading = document.createElement("div");
+    loading.className = "loading";
+    loading.innerText = "Loading...";
+    document.body.appendChild(loading);
+
+    // Show shadow covering entire page
+    const shadow = document.createElement("div");
+    shadow.className = "shadow";
+    document.body.appendChild(shadow);
+
     setTimeout(() => {
       this.pay(); // Simulate payment process
-      loading.style.display = "none"; // Hide loading indicator
-      modal.style.display = "none"; // Hide modal after payment
+      loading.remove(); // Remove loading indicator
+      shadow.remove(); // Remove shadow
+      this.closeModal(modal); // Close modal after payment
     }, 2000); // Simulate a delay for payment processing
+  }
+
+  closeModal(modal) {
+    modal.style.display = "none";
+    modal.remove(); // Remove modal from DOM
   }
 
   createPaymentButton() {
@@ -58,20 +71,17 @@ class Clay {
       .clay-modal {
         display: none;
         position: fixed;
-        z-index: 1000;
+        z-index: 1001; /* Ensure modal is above shadow */
         left: 0;
         bottom: 0; /* Bottom sheet */
         width: 100%; /* Full width */
         height: auto; /* Adjust height as needed */
-        background-color: rgba(0, 0, 0, 0.7); /* Background for modal */
-      }
-      .clay-modal-content {
-        background-color: #fefefe;
-        margin: 0; /* Remove margin for full width */
-        padding: 20px;
-        border: 1px solid #888;
+        background-color: #fefefe; /* Background for modal */
         border-radius: 30px 30px 0 0; /* Rounded top corners */
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Shadow above */
+      }
+      .clay-modal-content {
+        padding: 20px;
       }
       .clay-close {
         color: #aaa;
@@ -85,9 +95,21 @@ class Clay {
         cursor: pointer;
       }
       .loading {
-        text-align: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         font-size: 20px;
-        margin-top: 20px;
+        z-index: 1002; /* Above shadow */
+      }
+      .shadow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* Shadow covering entire page */
+        z-index: 1000; /* Below loading and modal */
       }
     `;
     document.head.appendChild(style);
