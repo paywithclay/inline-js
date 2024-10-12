@@ -1,7 +1,9 @@
 // index.js
 class Clay {
-  constructor(a, c, k) {
+  constructor(a, c, k, mode = "light") {
+    // Added mode parameter
     (this.amount = a), (this.currency = c), (this.key = k);
+    this.mode = mode; // Store mode
     this.addStyles();
   }
 
@@ -13,7 +15,7 @@ class Clay {
 
   createPaymentModal() {
     const m = document.createElement("div");
-    m.className = "clay-modal";
+    m.className = `clay-modal ${this.mode}`; // Apply mode class
     m.innerHTML = `
       <div class="clay-modal-content">
         <span class="clay-close">&times;</span>
@@ -21,6 +23,20 @@ class Clay {
         <p>Amount: ${this.amount} ${this.currency}</p>
         <button id="clay-confirm-button">Confirm Payment</button>
       </div>`;
+
+    // Gesture handling
+    let startY;
+    m.addEventListener("touchstart", (e) => {
+      startY = e.touches[0].clientY;
+    });
+
+    m.addEventListener("touchmove", (e) => {
+      const moveY = e.touches[0].clientY;
+      if (moveY - startY > 50) {
+        // Swipe down
+        this.closeModal(m);
+      }
+    });
 
     m.querySelector(".clay-close").onclick = () => {
       this.closeModal(m);
@@ -33,6 +49,7 @@ class Clay {
 
     document.body.appendChild(m);
     m.style.display = "block";
+    setTimeout(() => m.classList.add("show"), 10); // Trigger animation
   }
 
   showLoading() {
@@ -54,9 +71,12 @@ class Clay {
   }
 
   closeModal(modal) {
-    modal.style.display = "none";
-    modal.remove(); // Remove modal from DOM
-    this.removeLoading(); // Remove loading indicator and shadow
+    modal.classList.remove("show"); // Remove animation class
+    setTimeout(() => {
+      modal.style.display = "none";
+      modal.remove(); // Remove modal from DOM
+      this.removeLoading(); // Remove loading indicator and shadow
+    }, 300); // Match duration of CSS transition
   }
 
   removeLoading() {
@@ -79,14 +99,23 @@ class Clay {
       .clay-modal {
         display: none;
         position: fixed;
-        z-index: 1001; /* Ensure modal is above shadow */
+        z-index: 1001;
         left: 0;
-        bottom: 0; /* Bottom sheet */
-        width: 100%; /* Full width */
-        height: auto; /* Adjust height as needed */
-        background-color: #fefefe; /* Background for modal */
-        border-radius: 30px 30px 0 0; /* Rounded top corners */
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Shadow above */
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        background-color: #fefefe;
+        border-radius: 30px 30px 0 0;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease; /* Added transition */
+        transform: translateY(100%); /* Start off-screen */
+      }
+      .clay-modal.show {
+        transform: translateY(0); /* Slide in */
+      }
+      .clay-modal.dark {
+        background-color: #333; /* Dark mode background */
+        color: #fff; /* Dark mode text color */
       }
       .clay-modal-content {
         padding: 20px;
