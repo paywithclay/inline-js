@@ -20,17 +20,16 @@ class Clay {
     if (this.currentModal) {
       this.transitionToMode(window.innerWidth < 768 ? "mobile" : "desktop");
     } else {
-      this.currentModal = this.createModalElement(
-        window.innerWidth < 768 ? "mobile" : "desktop"
-      );
+      this.currentModal = this.createModalElement();
       document.body.appendChild(this.currentModal);
       this.showModal(this.currentModal);
     }
   }
 
-  createModalElement(type) {
+  createModalElement() {
     const m = document.createElement("div");
-    m.className = `clay-modal ${type} ${this.mode}`; // Apply mode class
+    const isMobile = window.innerWidth < 768;
+    m.className = `clay-modal ${isMobile ? "mobile" : "desktop"} ${this.mode}`; // Apply mode class
     m.innerHTML = `
       <div class="clay-modal-content">
         <span class="clay-close">&times;</span>
