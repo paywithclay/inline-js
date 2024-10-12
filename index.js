@@ -85,20 +85,18 @@ class Clay {
   }
 
   showLoading() {
-    if (window.innerWidth < 768) {
-      const loading = document.createElement("div");
-      loading.className = "lds-ripple";
-      loading.innerHTML = `
-        <div></div>
-        <div></div>
-      `;
-      document.body.appendChild(loading);
+    const loading = document.createElement("div");
+    loading.className = "lds-ripple";
+    loading.innerHTML = `
+      <div></div>
+      <div></div>
+    `;
+    document.body.appendChild(loading);
 
-      // Show shadow covering entire page
-      const shadow = document.createElement("div");
-      shadow.className = "shadow";
-      document.body.appendChild(shadow);
-    }
+    // Show shadow covering entire page
+    const shadow = document.createElement("div");
+    shadow.className = "shadow";
+    document.body.appendChild(shadow);
 
     // Show the payment modal after loading
     this.createPaymentModal();
@@ -146,30 +144,26 @@ class Clay {
         display: none;
         position: fixed;
         z-index: 1001;
-        left: 0;
-        bottom: 0;
+        left: 50%; /* Center horizontally */
+        top: 50%; /* Center vertically */
+        transform: translate(-50%, -50%); /* Adjust for centering */
         width: 100%;
         height: auto;
-        background-color: #fefefe;
+        background-color: #fefefe; /* Light mode background */
         border-radius: 30px 30px 0 0;
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease; /* Added transition */
-        transform: translateY(100%); /* Start off-screen */
+      }
+      .clay-modal.dark {
+        background-color: #333; /* Dark mode background */
+        color: #fff; /* Dark mode text color */
       }
       .clay-modal.show {
-        transform: translateY(0); /* Slide in */
+        transform: translate(-50%, -50%) translateY(0); /* Slide in */
       }
-      @media (min-width: 768px) {
+       @media (min-width: 768px) {
         .clay-modal {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%); /* Center the modal */
           width: 400px; /* Set a fixed width for the popup */
-          height: auto;
-          border-radius: 10px; /* Rounded corners */
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          bottom: auto; /* Reset bottom for desktop */
         }
       }
       .clay-modal-content {
