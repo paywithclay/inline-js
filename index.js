@@ -404,7 +404,11 @@ class GestureController {
   }
 }
 
-if (typeof window !== "undefined") {
-  window.Clay = Clay;
+// Check if module is defined for Node.js or attach to window for browser
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = Clay;
+} else {
+  if (typeof window !== "undefined") {
+    window.Clay = Clay;
+  }
 }
-module.exports = Clay;
