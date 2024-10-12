@@ -48,12 +48,14 @@ class Clay {
               </g>
             </svg>
           </span>
-          <span class="clay-close" style="cursor: pointer;"> <!-- Updated close button -->
+          <span class="modal-title">Pay with Clay</span> <!-- Added title -->
+          <span class="modal-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
               <path fill="currentColor" d="m12 13.4l-2.917 2.925q-.277.275-.704.275t-.704-.275q-.275-.275-.275-.7t.275-.7L10.6 12L7.675 9.108Q7.4 8.831 7.4 8.404t.275-.704q.275-.275.7-.275t.7.275L12 10.625L14.892 7.7q.277-.275.704-.275t.704.275q.3.3.3.713t-.3.687L13.375 12l2.925 2.917q.275.277.275.704t-.275.704q-.3.3-.712.3t-.688-.3z"/>
             </svg>
           </span>
         </div>
+        <hr style="border: 1px solid #ccc; margin: 10px 0;"> <!-- Added horizontal line -->
         <h2>Payment</h2>
         <p>Amount: ${this.amount} ${this.currency}</p>
         <button id="clay-confirm-button">Confirm Payment</button>
@@ -249,6 +251,14 @@ class Clay {
       .clay-modal.dark {
         background-color: #191a1a; /* Dark mode background */
         color: #fff; /* Dark mode text color */
+      }
+
+       .modal-title {
+        color: inherit; /* Use current text color */
+        font-size: 24px; /* Set font size */
+        font-weight: bold; /* Make the title bold */
+        text-align: center; /* Center the text */
+        margin: 10px 0; /* Add margin for spacing */
       }
 
       /* Close button styles */
