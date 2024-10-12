@@ -1,6 +1,7 @@
 // index.js
 class Clay {
   constructor(a, c, k, mode = "light") {
+    // Added mode parameter
     (this.amount = a), (this.currency = c), (this.key = k);
     this.mode = mode; // Store mode
     this.addStyles();
@@ -32,7 +33,8 @@ class Clay {
     m.addEventListener("touchmove", (e) => {
       const moveY = e.touches[0].clientY;
       if (moveY - startY > 50) {
-        this.closeModal(m); // Swipe down to close
+        // Swipe down
+        this.closeModal(m);
       }
     });
 
@@ -197,30 +199,7 @@ class Clay {
   }
 }
 
-// React component for ClayPay
-const ClayPay = ({ amount, mode = "light", key, currency }) => {
-  const handlePayment = () => {
-    const paymentButton = new Clay(
-      amount,
-      currency,
-      key,
-      mode
-    ).createPaymentButton();
-    document.body.appendChild(paymentButton);
-  };
-
-  return (
-    <button onClick={handlePayment}>
-      Pay {amount} {currency}
-    </button>
-  );
-};
-
-// Expose Clay and ClayPay to the global window object
 if (typeof window !== "undefined") {
   window.Clay = Clay;
-  window.ClayPay = ClayPay; // Expose ClayPay to the global window object
 }
-
-// Exporting for module systems
-module.exports = { Clay, ClayPay };
+module.exports = Clay;
