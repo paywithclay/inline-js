@@ -207,19 +207,8 @@ class Clay {
   addStyles() {
     const style = document.createElement("style");
     style.innerHTML = `
-      @font-face {
-        font-family: 'Fredoka-Bold';
-        src: url(' https://unpkg.com/@paywithclay/inline-js/assets/fonts/Fredoka_Condensed-Bold.ttf') format('truetype');
-        font-weight: bold;
-        font-style: normal;
-      }
-
-      @font-face {
-        font-family: 'Fredoka-Light';
-        src: url(' https://unpkg.com/@paywithclay/inline-js/assets/fonts/Fredoka-Light.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-      }
+      /* Link to Google Fonts */
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap');
 
       .clay-modal {
         display: none;
@@ -229,13 +218,13 @@ class Clay {
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
         opacity: 0; /* Start hidden */
-        font-family: 'Fredoka-Light', sans-serif; /* Apply light font */
+        font-family: 'Fredoka', sans-serif; /* Apply Fredoka font */
       }
 
       .modal-title {
-        font-family: 'Fredoka-Bold', sans-serif; /* Apply bold font to title */
+        font-family: 'Fredoka', sans-serif; /* Apply Fredoka font to title */
       }
-        /* Close button styles */
+      /* Close button styles */
       .clay-close {
         color: inherit; /* Use current text color */
         float: right;
