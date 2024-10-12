@@ -17,28 +17,12 @@ class Clay {
   }
 
   createPaymentModal() {
-    if (window.innerWidth < 768) {
-      this.createMobilePaymentModal(); // Call mobile modal function
-    } else {
-      this.createDesktopPaymentModal(); // Call desktop modal function
-    }
-  }
-
-  createMobilePaymentModal() {
     if (this.currentModal) {
-      this.transitionToMobile(this.currentModal); // Transition from desktop to mobile
+      this.transitionToMode(window.innerWidth < 768 ? "mobile" : "desktop");
     } else {
-      this.currentModal = this.createModalElement("mobile");
-      document.body.appendChild(this.currentModal);
-      this.showModal(this.currentModal);
-    }
-  }
-
-  createDesktopPaymentModal() {
-    if (this.currentModal) {
-      this.transitionToDesktop(this.currentModal); // Transition from mobile to desktop
-    } else {
-      this.currentModal = this.createModalElement("desktop");
+      this.currentModal = this.createModalElement(
+        window.innerWidth < 768 ? "mobile" : "desktop"
+      );
       document.body.appendChild(this.currentModal);
       this.showModal(this.currentModal);
     }
@@ -70,26 +54,25 @@ class Clay {
     return m;
   }
 
-  transitionToMobile(modal) {
-    modal.classList.remove("desktop");
-    modal.classList.add("mobile");
-    modal.style.transition = "transform 0.3s ease, opacity 0.3s ease"; // Set transition
-    modal.style.transform = "translateY(100%)"; // Move to bottom
-    setTimeout(() => {
-      modal.style.transform = "translateY(0)"; // Slide in
-      modal.style.opacity = "1"; // Fade in
-    }, 10);
-  }
+  transitionToMode(mode) {
+    if (this.currentModal) {
+      const isMobile = mode === "mobile";
+      this.currentModal.classList.remove(isMobile ? "desktop" : "mobile");
+      this.currentModal.classList.add(mode);
+      this.currentModal.style.transition =
+        "transform 0.3s ease, opacity 0.3s ease"; // Set transition
 
-  transitionToDesktop(modal) {
-    modal.classList.remove("mobile");
-    modal.classList.add("desktop");
-    modal.style.transition = "transform 0.3s ease, opacity 0.3s ease"; // Set transition
-    modal.style.transform = "translateY(-100%)"; // Move to top
-    setTimeout(() => {
-      modal.style.transform = "translateY(0)"; // Slide in
-      modal.style.opacity = "1"; // Fade in
-    }, 10);
+      if (isMobile) {
+        this.currentModal.style.transform = "translateY(100%)"; // Move to bottom
+      } else {
+        this.currentModal.style.transform = "translateY(-100%)"; // Move to top
+      }
+
+      setTimeout(() => {
+        this.currentModal.style.transform = "translateY(0)"; // Slide in
+        this.currentModal.style.opacity = "1"; // Fade in
+      }, 10);
+    }
   }
 
   showModal(modal) {
