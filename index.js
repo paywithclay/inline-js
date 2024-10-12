@@ -21,7 +21,7 @@ class Clay {
     const modal = document.createElement("div");
     modal.className = "clay-modal";
     modal.innerHTML = `
-      <div class="clay-modal-content" style="border-radius: 20px; overflow: hidden;">
+      <div class="clay-modal-content" style="border-radius: 20px; overflow: hidden; width: 300px; margin: auto;">
         <span class="clay-close">&times;</span>
         <h2>Payment</h2>
         <p>Amount: ${this.amount} ${this.currency}</p>
