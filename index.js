@@ -85,18 +85,20 @@ class Clay {
   }
 
   showLoading() {
-    const loading = document.createElement("div");
-    loading.className = "lds-ripple";
-    loading.innerHTML = `
-      <div></div>
-      <div></div>
-    `;
-    document.body.appendChild(loading);
+    if (window.innerWidth < 768) {
+      const loading = document.createElement("div");
+      loading.className = "lds-ripple";
+      loading.innerHTML = `
+        <div></div>
+        <div></div>
+      `;
+      document.body.appendChild(loading);
 
-    // Show shadow covering entire page
-    const shadow = document.createElement("div");
-    shadow.className = "shadow";
-    document.body.appendChild(shadow);
+      // Show shadow covering entire page
+      const shadow = document.createElement("div");
+      shadow.className = "shadow";
+      document.body.appendChild(shadow);
+    }
 
     // Show the payment modal after loading
     this.createPaymentModal();
