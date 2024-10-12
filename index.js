@@ -38,7 +38,22 @@ class Clay {
     m.className = `clay-modal ${isMobile ? "mobile" : "desktop"} ${this.mode}`; // Apply mode class
     m.innerHTML = `
       <div class="clay-modal-content">
-        <span class="clay-close">&times;</span>
+        <div class="modal-header">
+          <span class="modal-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <g fill="none" stroke="currentColor" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-width="2"/>
+                <path stroke-width="3" d="M12 8h.01v.01H12z"/>
+                <path stroke-linecap="round" stroke-width="2" d="M12 12v4"/>
+              </g>
+            </svg>
+          </span>
+          <span class="clay-close" style="cursor: pointer;"> <!-- Updated close button -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <path fill="currentColor" d="m12 13.4l-2.917 2.925q-.277.275-.704.275t-.704-.275q-.275-.275-.275-.7t.275-.7L10.6 12L7.675 9.108Q7.4 8.831 7.4 8.404t.275-.704q.275-.275.7-.275t.7.275L12 10.625L14.892 7.7q.277-.275.704-.275t.704.275q.3.3.3.713t-.3.687L13.375 12l2.925 2.917q.275.277.275.704t-.275.704q-.3.3-.712.3t-.688-.3z"/>
+            </svg>
+          </span>
+        </div>
         <h2>Payment</h2>
         <p>Amount: ${this.amount} ${this.currency}</p>
         <button id="clay-confirm-button">Confirm Payment</button>
@@ -238,20 +253,22 @@ class Clay {
 
       /* Close button styles */
       .clay-close {
-        color: #aaa; /* Default color */
+        color: inherit; /* Use current text color */
         float: right;
         font-size: 28px;
         font-weight: bold;
       }
 
-      /* Close button color for light mode */
-      .clay-modal.light .clay-close {
-        color: black; /* Black close button in light mode */
+      /* Modal header styles */
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
-      /* Close button color for dark mode */
-      .clay-modal.dark .clay-close {
-        color: white; /* White close button in dark mode */
+      /* Modal icon styles */
+      .modal-icon {
+        color: inherit; /* Use current text color */
       }
 
       /* Media query to handle responsive behavior */
@@ -361,7 +378,7 @@ class Clay {
     };
 
     // Send tracking data to the specified URL
-    fetch("https://pulse.walletconnect.com/e", {
+    fetch("https://pulse.paywithclay.io/e", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
