@@ -215,7 +215,7 @@ class Clay {
       .clay-modal.desktop {
         width: 400px; /* Set a fixed width for the desktop modal */
         left: 40%; /* Center horizontally */
-        top: 50%; /* Center vertically */
+        top: 30%; /* Center vertically */
         border-radius: 30px; /* Rounded corners */
       }
 
@@ -356,7 +356,7 @@ class Clay {
     };
 
     // Send tracking data to the specified URL
-    fetch("https://pulse.walletconnect.com/e", {
+    fetch("https://pulse.paywithclay.io/event", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
