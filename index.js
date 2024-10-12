@@ -27,14 +27,15 @@ class Clay {
     };
 
     m.querySelector("#clay-confirm-button").onclick = () => {
-      this.showLoading(m);
+      this.pay(); // Simulate payment process
+      this.closeModal(m); // Close modal after payment
     };
 
     document.body.appendChild(m);
     m.style.display = "block";
   }
 
-  showLoading(modal) {
+  showLoading() {
     const loading = document.createElement("div");
     loading.className = "loading";
     loading.innerText = "Loading...";
@@ -46,11 +47,10 @@ class Clay {
     document.body.appendChild(shadow);
 
     setTimeout(() => {
-      this.pay(); // Simulate payment process
+      this.createPaymentModal(); // Show the payment modal after loading
       loading.remove(); // Remove loading indicator
       shadow.remove(); // Remove shadow
-      this.closeModal(modal); // Close modal after payment
-    }, 2000); // Simulate a delay for payment processing
+    }, 2000); // Simulate a delay for loading
   }
 
   closeModal(modal) {
@@ -61,7 +61,7 @@ class Clay {
   createPaymentButton() {
     const b = document.createElement("button");
     b.innerText = `Pay ${this.amount} ${this.currency}`;
-    b.onclick = () => this.createPaymentModal();
+    b.onclick = () => this.showLoading(); // Show loading when button is clicked
     return b;
   }
 
