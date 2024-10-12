@@ -5,6 +5,8 @@ class Clay {
     this.currency = c;
     this.key = k;
     this.mode = mode; // Store mode
+    this.currentModal = null; // Track the current modal
+    this.gestureController = new GestureController(); // Initialize gesture controller
     this.addStyles();
   }
 
@@ -23,47 +25,28 @@ class Clay {
   }
 
   createMobilePaymentModal() {
-    const m = document.createElement("div");
-    m.className = `clay-modal mobile ${this.mode}`; // Apply mode class
-    m.innerHTML = `
-      <div class="clay-modal-content">
-        <span class="clay-close">&times;</span>
-        <h2>Payment</h2>
-        <p>Amount: ${this.amount} ${this.currency}</p>
-        <button id="clay-confirm-button">Confirm Payment</button>
-      </div>`;
-
-    // Gesture handling for mobile
-    let startY;
-    m.addEventListener("touchstart", (e) => {
-      startY = e.touches[0].clientY;
-    });
-
-    m.addEventListener("touchmove", (e) => {
-      const moveY = e.touches[0].clientY;
-      if (moveY - startY > 50) {
-        // Swipe down
-        this.closeModal(m);
-      }
-    });
-
-    m.querySelector(".clay-close").onclick = () => {
-      this.closeModal(m);
-    };
-
-    m.querySelector("#clay-confirm-button").onclick = () => {
-      this.pay(); // Simulate payment process
-      this.closeModal(m); // Close modal after payment
-    };
-
-    document.body.appendChild(m);
-    m.style.display = "block";
-    setTimeout(() => m.classList.add("show"), 10); // Trigger animation
+    if (this.currentModal) {
+      this.transitionToMobile(this.currentModal); // Transition from desktop to mobile
+    } else {
+      this.currentModal = this.createModalElement("mobile");
+      document.body.appendChild(this.currentModal);
+      this.showModal(this.currentModal);
+    }
   }
 
   createDesktopPaymentModal() {
+    if (this.currentModal) {
+      this.transitionToDesktop(this.currentModal); // Transition from mobile to desktop
+    } else {
+      this.currentModal = this.createModalElement("desktop");
+      document.body.appendChild(this.currentModal);
+      this.showModal(this.currentModal);
+    }
+  }
+
+  createModalElement(type) {
     const m = document.createElement("div");
-    m.className = `clay-modal desktop ${this.mode}`; // Apply mode class
+    m.className = `clay-modal ${type} ${this.mode}`; // Apply mode class
     m.innerHTML = `
       <div class="clay-modal-content">
         <span class="clay-close">&times;</span>
@@ -71,6 +54,9 @@ class Clay {
         <p>Amount: ${this.amount} ${this.currency}</p>
         <button id="clay-confirm-button">Confirm Payment</button>
       </div>`;
+
+    // Gesture handling
+    this.gestureController.addGestureHandlers(m, this.closeModal.bind(this, m));
 
     m.querySelector(".clay-close").onclick = () => {
       this.closeModal(m);
@@ -81,27 +67,34 @@ class Clay {
       this.closeModal(m); // Close modal after payment
     };
 
-    document.body.appendChild(m);
-    m.style.display = "block";
-    setTimeout(() => m.classList.add("show"), 10); // Trigger animation
+    return m;
   }
 
-  showLoading() {
-    const loading = document.createElement("div");
-    loading.className = "lds-ripple";
-    loading.innerHTML = `
-      <div></div>
-      <div></div>
-    `;
-    document.body.appendChild(loading);
+  transitionToMobile(modal) {
+    modal.classList.remove("desktop");
+    modal.classList.add("mobile");
+    modal.style.transition = "transform 0.3s ease, opacity 0.3s ease"; // Set transition
+    modal.style.transform = "translateY(100%)"; // Move to bottom
+    setTimeout(() => {
+      modal.style.transform = "translateY(0)"; // Slide in
+      modal.style.opacity = "1"; // Fade in
+    }, 10);
+  }
 
-    // Show shadow covering entire page
-    const shadow = document.createElement("div");
-    shadow.className = "shadow";
-    document.body.appendChild(shadow);
+  transitionToDesktop(modal) {
+    modal.classList.remove("mobile");
+    modal.classList.add("desktop");
+    modal.style.transition = "transform 0.3s ease, opacity 0.3s ease"; // Set transition
+    modal.style.transform = "translateY(-100%)"; // Move to top
+    setTimeout(() => {
+      modal.style.transform = "translateY(0)"; // Slide in
+      modal.style.opacity = "1"; // Fade in
+    }, 10);
+  }
 
-    // Show the payment modal after loading
-    this.createPaymentModal();
+  showModal(modal) {
+    modal.style.display = "block";
+    setTimeout(() => modal.classList.add("show"), 10); // Trigger animation
   }
 
   closeModal(modal) {
@@ -109,6 +102,7 @@ class Clay {
     setTimeout(() => {
       modal.style.display = "none";
       modal.remove(); // Remove modal from DOM
+      this.currentModal = null; // Reset current modal
       this.removeLoading(); // Remove loading indicator and shadow
     }, 300); // Match duration of CSS transition
   }
@@ -139,6 +133,24 @@ class Clay {
     }
   }
 
+  showLoading() {
+    const loading = document.createElement("div");
+    loading.className = "lds-ripple";
+    loading.innerHTML = `
+      <div></div>
+      <div></div>
+    `;
+    document.body.appendChild(loading);
+
+    // Show shadow covering entire page
+    const shadow = document.createElement("div");
+    shadow.className = "shadow";
+    document.body.appendChild(shadow);
+
+    // Show the payment modal after loading
+    this.createPaymentModal();
+  }
+
   addStyles() {
     const style = document.createElement("style");
     style.innerHTML = `
@@ -151,10 +163,10 @@ class Clay {
         background-color: #fefefe; /* Light mode background */
         border-radius: 30px 30px 0 0;
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease; /* Added transition */
+        transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
         left: 0;
         bottom: 0; /* Position at the bottom for mobile */
-        border-radius: 30px 30px 0 0; /* Rounded top corners */
+        opacity: 0; /* Start hidden */
       }
       .clay-modal.desktop {
         display: none;
@@ -167,7 +179,8 @@ class Clay {
         background-color: #fefefe; /* Light mode background */
         border-radius: 30px; /* Rounded corners */
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease; /* Added transition */
+        transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
+        opacity: 0; /* Start hidden */
       }
       .clay-modal.dark {
         background-color: #333; /* Dark mode background */
@@ -175,6 +188,7 @@ class Clay {
       }
       .clay-modal.show {
         transform: translateY(0); /* Slide in */
+        opacity: 1; /* Fade in */
       }
       @media (min-width: 768px) {
         .clay-modal.desktop {
@@ -260,6 +274,25 @@ class Clay {
       }
     `;
     document.head.appendChild(style);
+  }
+}
+
+// Gesture controller class to handle swipe gestures
+class GestureController {
+  addGestureHandlers(modal, closeCallback) {
+    let startY;
+
+    modal.addEventListener("touchstart", (e) => {
+      startY = e.touches[0].clientY;
+    });
+
+    modal.addEventListener("touchmove", (e) => {
+      const moveY = e.touches[0].clientY;
+      if (moveY - startY > 50) {
+        // Swipe down
+        closeCallback();
+      }
+    });
   }
 }
 
