@@ -166,6 +166,18 @@ class Clay {
         opacity: 1; /* Fade in */
       }
 
+      /* Light mode styles */
+      .clay-modal.light {
+        background-color: #fefefe; /* Light mode background */
+        color: #000; /* Light mode text color */
+      }
+
+      /* Dark mode styles */
+      .clay-modal.dark {
+        background-color: #333; /* Dark mode background */
+        color: #fff; /* Dark mode text color */
+      }
+
       /* Media query to handle responsive behavior */
       @media (max-width: 768px) {
         .clay-modal.desktop {
