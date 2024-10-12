@@ -120,7 +120,7 @@ class Clay {
         width: 100%;
         height: auto;
         background-color: #fefefe;
-        border-radius: 30px 30px 0 0;
+        border-radius: 40px 40px 0 0; /* Increased rounded edges for bottom sheet */
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease; /* Added transition */
         transform: translateY(100%); /* Start off-screen */
@@ -215,7 +215,7 @@ class Clay {
         bottom: 0;
         width: 100%;
         height: auto;
-        border-radius: 30px 30px 0 0;
+        border-radius: 40px 40px 0 0; /* Increased rounded edges for bottom sheet */
         transition: transform 0.3s ease;
         transform: translateY(100%); /* Start off-screen */
       }
@@ -230,7 +230,7 @@ class Clay {
         transform: translate(-50%, -50%);
         width: 400px; /* Example width */
         height: auto;
-        border-radius: 10px;
+        border-radius: 20px; /* Increased rounded edges for popup */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
     `;
