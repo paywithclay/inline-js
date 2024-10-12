@@ -215,7 +215,7 @@ class Clay {
       .clay-modal.desktop {
         width: 400px; /* Set a fixed width for the desktop modal */
         left: 40%; /* Center horizontally */
-        top: 30%; /* Center vertically */
+        top: 50%; /* Center vertically */
         border-radius: 30px; /* Rounded corners */
       }
 
@@ -236,6 +236,24 @@ class Clay {
         color: #fff; /* Dark mode text color */
       }
 
+      /* Close button styles */
+      .clay-close {
+        color: #aaa; /* Default color */
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      /* Close button color for light mode */
+      .clay-modal.light .clay-close {
+        color: black; /* Black close button in light mode */
+      }
+
+      /* Close button color for dark mode */
+      .clay-modal.dark .clay-close {
+        color: white; /* White close button in dark mode */
+      }
+
       /* Media query to handle responsive behavior */
       @media (max-width: 768px) {
         .clay-modal.desktop {
@@ -251,19 +269,6 @@ class Clay {
 
       .clay-modal-content {
         padding: 20px;
-      }
-
-      .clay-close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-
-      .clay-close:hover, .clay-close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
       }
 
       .lds-ripple,
@@ -356,7 +361,7 @@ class Clay {
     };
 
     // Send tracking data to the specified URL
-    fetch("https://pulse.paywithclay.io/event", {
+    fetch("https://pulse.walletconnect.com/e", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
