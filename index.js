@@ -32,7 +32,7 @@ class Clay {
   }
   addStyles() {
     const style = document.createElement("style");
-    style.innerHTML = `.clay-modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.7)}.clay-modal-content{background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:50%;border-radius:30px;box-shadow:0 4px 8px rgba(0,0,0,0.2)}.clay-close{color:#aaa;float:right;font-size:28px;font-weight:bold}.clay-close:hover,.clay-close:focus{color:black;text-decoration:none;cursor:pointer}`;
+    style.innerHTML = `.clay-modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.7)}.clay-modal-content{background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:50%;border-radius:30px;box-shadow:0 4px 8px rgba(0,0,0,0.2)}.clay-close{color:#aaa;float:right;font-size:28px;font-weight:bold}.clay-close:hover,.clay-close:focus{color:black;text-decoration:none;cursor:pointer}@media (max-width: 768px){.clay-modal-content{position:absolute;bottom:0;left:0;width:100%;border-radius:20px 20px 0 0;box-shadow:none;margin:0}}`;
     document.head.appendChild(style);
   }
 }
