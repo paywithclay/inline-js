@@ -15,10 +15,7 @@ class Clay {
 
   createPaymentModal() {
     const m = document.createElement("div");
-    const isMobile = window.innerWidth < 768; // Check if the device is mobile
-    m.className = `clay-modal ${this.mode} ${
-      isMobile ? "bottom-sheet" : "popup"
-    }`; // Apply mode and type class
+    m.className = `clay-modal ${this.mode}`; // Apply mode class
     m.innerHTML = `
       <div class="clay-modal-content">
         <span class="clay-close">&times;</span>
@@ -208,30 +205,6 @@ class Clay {
         height: 100%;
         background-color: rgba(0, 0, 0, 0.7); /* Shadow covering entire page */
         z-index: 1000; /* Below loading and modal */
-      }
-      .bottom-sheet {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: auto;
-        border-radius: 30px 30px 0 0;
-        transition: transform 0.3s ease;
-        transform: translateY(100%); /* Start off-screen */
-      }
-      .bottom-sheet.show {
-        transform: translateY(0); /* Slide in */
-      }
-      .popup {
-        /* Styles for desktop popup */
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px; /* Example width */
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
     `;
     document.head.appendChild(style);
