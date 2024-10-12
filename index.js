@@ -160,8 +160,8 @@ class Clay {
         display: none;
         position: fixed;
         z-index: 1001;
+        left: 40%; /* Center horizontally */
         top: 50%; /* Center vertically */
-        transform: translate(-50%, -50%); /* Adjust for centering */
         width: 400px; /* Set a fixed width for the desktop modal */
         height: auto;
         background-color: #fefefe; /* Light mode background */
