@@ -78,7 +78,7 @@ class Clay {
         // Only allow dragging down
         modal.style.transform = `translateY(${
           deltaY + initialTransform
-        }px) scale(${1 - deltaY / 500})`; // Zoom out while dragging
+        }px) scale(1)`; // Slide down while dragging
       }
     });
 
@@ -90,7 +90,7 @@ class Clay {
         this.closeModal(modal);
       } else {
         modal.style.transition = "transform 0.3s ease"; // Reset transition
-        modal.style.transform = `translateY(0) scale(1)`; // Reset position and scale
+        modal.style.transform = `translateY(0) scale(1)`; // Reset position
       }
     });
   }
@@ -103,20 +103,18 @@ class Clay {
       this.currentModal.style.transition =
         "transform 0.3s ease, opacity 0.3s ease"; // Set transition
 
-      // Zoom in effect
-      this.currentModal.style.transform = "scale(0.5)"; // Start scaled down
-      setTimeout(() => {
-        this.currentModal.style.transform = "scale(1)"; // Zoom in
-      }, 10);
-
       if (isMobile) {
         this.currentModal.style.transform = "translateY(100%)"; // Move to bottom
       } else {
-        this.currentModal.style.transform = "translateY(-100%)"; // Move to top
+        this.currentModal.style.transform = "scale(0.5)"; // Start scaled down for desktop
       }
 
       setTimeout(() => {
-        this.currentModal.style.transform = "translateY(0)"; // Slide in
+        if (isMobile) {
+          this.currentModal.style.transform = "translateY(0)"; // Slide in for mobile
+        } else {
+          this.currentModal.style.transform = "scale(1)"; // Zoom in for desktop
+        }
         this.currentModal.style.opacity = "1"; // Fade in
       }, 10);
     }
@@ -128,19 +126,22 @@ class Clay {
   }
 
   closeModal(modal) {
+    const isMobile = window.innerWidth < 768;
     modal.classList.remove("show"); // Remove animation class
     modal.style.transition = "transform 0.3s ease, opacity 0.3s ease"; // Set transition for closing
-    modal.style.transform = "scale(0.5)"; // Zoom out effect
+
+    if (isMobile) {
+      modal.style.transform = "translateY(100%)"; // Slide out for mobile
+    } else {
+      modal.style.transform = "scale(0.5)"; // Zoom out for desktop
+    }
+
     setTimeout(() => {
       modal.style.display = "none";
       modal.remove(); // Remove modal from DOM
       this.currentModal = null; // Reset current modal
       this.removeLoading(); // Remove loading indicator and shadow
-      console.log(
-        `Modal closed in ${
-          window.innerWidth < 768 ? "mobile" : "desktop"
-        } mode.`
-      );
+      console.log(`Modal closed in ${isMobile ? "mobile" : "desktop"} mode.`);
     }, 300); // Match duration of CSS transition
   }
 
