@@ -95,13 +95,14 @@ class Clay {
         display: none;
         position: fixed;
         z-index: 1001;
-        left: 0;
-        bottom: 0;
-        width: 100%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%); /* Center the modal */
+        width: 400px; /* Set a fixed width for the popup */
         height: auto;
         background-color: #fefefe;
-        border-radius: 30px 30px 0 0;
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
       .clay-modal.dark {
         background-color: #333; /* Dark mode background */
