@@ -2,6 +2,7 @@
 class Clay {
   constructor(a, c, k) {
     (this.amount = a), (this.currency = c), (this.key = k);
+    this.addStyles();
   }
   pay() {
     console.log(
@@ -11,7 +12,7 @@ class Clay {
   createPaymentModal() {
     const m = document.createElement("div");
     (m.className = "clay-modal"),
-      (m.innerHTML = `<div class="clay-modal-content" style="border-radius: 20px; overflow: hidden; width: 300px; margin: auto;"><span class="clay-close">&times;</span><h2>Payment</h2><p>Amount: ${this.amount} ${this.currency}</p><button id="clay-confirm-button">Confirm Payment</button></div>`),
+      (m.innerHTML = `<div class="clay-modal-content"><span class="clay-close">&times;</span><h2>Payment</h2><p>Amount: ${this.amount} ${this.currency}</p><button id="clay-confirm-button">Confirm Payment</button></div>`),
       (m.querySelector(".clay-close").onclick = () => {
         m.style.display = "none";
       }),
@@ -28,6 +29,11 @@ class Clay {
       (b.onclick = () => this.createPaymentModal()),
       b
     );
+  }
+  addStyles() {
+    const style = document.createElement("style");
+    style.innerHTML = `.clay-modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.7)}.clay-modal-content{background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:50%;top:50%;transform:translateY(-50%);position:absolute;left:50%;transform:translate(-50%,-50%)}.clay-close{color:#aaa;float:right;font-size:28px;font-weight:bold}.clay-close:hover,.clay-close:focus{color:black;text-decoration:none;cursor:pointer}`;
+    document.head.appendChild(style);
   }
 }
 if (typeof window !== "undefined") {
