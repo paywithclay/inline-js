@@ -136,65 +136,71 @@ class Clay {
   addStyles() {
     const style = document.createElement("style");
     style.innerHTML = `
-      .clay-modal.mobile {
+      .clay-modal {
         display: none;
         position: fixed;
         z-index: 1001;
+        background-color: #fefefe; /* Light mode background */
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
+        opacity: 0; /* Start hidden */
+      }
+
+      .clay-modal.mobile {
         width: 100%;
         height: auto;
-        background-color: #fefefe; /* Light mode background */
-        border-radius: 30px 30px 0 0;
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
+        border-radius: 30px 30px 0 0; /* Rounded top corners */
         left: 0;
         bottom: 0; /* Position at the bottom for mobile */
-        opacity: 0; /* Start hidden */
       }
+
       .clay-modal.desktop {
-        display: none;
-        position: fixed;
-        z-index: 1001;
+        width: 400px; /* Set a fixed width for the desktop modal */
         left: 40%; /* Center horizontally */
         top: 50%; /* Center vertically */
-        width: 400px; /* Set a fixed width for the desktop modal */
-        height: auto;
-        background-color: #fefefe; /* Light mode background */
         border-radius: 30px; /* Rounded corners */
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
-        opacity: 0; /* Start hidden */
       }
-      .clay-modal.dark {
-        background-color: #333; /* Dark mode background */
-        color: #fff; /* Dark mode text color */
-      }
+
       .clay-modal.show {
         transform: translateY(0); /* Slide in */
         opacity: 1; /* Fade in */
       }
-      @media (min-width: 768px) {
+
+      /* Media query to handle responsive behavior */
+      @media (max-width: 768px) {
         .clay-modal.desktop {
-          width: 400px; /* Set a fixed width for the desktop modal */
+          display: none; /* Hide desktop modal on mobile */
         }
       }
+
+      @media (min-width: 769px) {
+        .clay-modal.mobile {
+          display: none; /* Hide mobile modal on desktop */
+        }
+      }
+
       .clay-modal-content {
         padding: 20px;
       }
+
       .clay-close {
         color: #aaa;
         float: right;
         font-size: 28px;
         font-weight: bold;
       }
+
       .clay-close:hover, .clay-close:focus {
         color: black;
         text-decoration: none;
         cursor: pointer;
       }
+
       .lds-ripple,
       .lds-ripple div {
         box-sizing: border-box;
       }
+
       .lds-ripple {
         display: inline-block;
         position: fixed;
@@ -205,6 +211,7 @@ class Clay {
         height: 80px;
         z-index: 1000; /* Above shadow */
       }
+
       .lds-ripple div {
         position: absolute;
         border: 4px solid currentColor;
@@ -212,9 +219,11 @@ class Clay {
         border-radius: 50%;
         animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
       }
+
       .lds-ripple div:nth-child(2) {
         animation-delay: -0.5s;
       }
+
       @keyframes lds-ripple {
         0% {
           top: 36px;
@@ -245,6 +254,7 @@ class Clay {
           opacity: 0;
         }
       }
+
       .shadow {
         position: fixed;
         top: 0;
