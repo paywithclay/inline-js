@@ -23,6 +23,11 @@ class Clay {
       this.currentModal = this.createModalElement();
       document.body.appendChild(this.currentModal);
       this.showModal(this.currentModal);
+      console.log(
+        `Modal opened in ${
+          window.innerWidth < 768 ? "mobile" : "desktop"
+        } mode.`
+      );
     }
   }
 
@@ -41,6 +46,9 @@ class Clay {
     // Gesture handling
     this.gestureController.addGestureHandlers(m, this.closeModal.bind(this, m));
 
+    // Add drag-to-close functionality
+    this.addDragToClose(m);
+
     m.querySelector(".clay-close").onclick = () => {
       this.closeModal(m);
     };
@@ -53,6 +61,40 @@ class Clay {
     return m;
   }
 
+  addDragToClose(modal) {
+    let startY;
+    let initialTransform = 0;
+
+    modal.addEventListener("touchstart", (e) => {
+      startY = e.touches[0].clientY;
+      initialTransform =
+        parseFloat(getComputedStyle(modal).transform.split(",")[5]) || 0;
+    });
+
+    modal.addEventListener("touchmove", (e) => {
+      const moveY = e.touches[0].clientY;
+      const deltaY = moveY - startY;
+      if (deltaY > 0) {
+        // Only allow dragging down
+        modal.style.transform = `translateY(${
+          deltaY + initialTransform
+        }px) scale(${1 - deltaY / 500})`; // Zoom out while dragging
+      }
+    });
+
+    modal.addEventListener("touchend", (e) => {
+      const moveY = e.changedTouches[0].clientY;
+      const deltaY = moveY - startY;
+      if (deltaY > 100) {
+        // If dragged down enough, close the modal
+        this.closeModal(modal);
+      } else {
+        modal.style.transition = "transform 0.3s ease"; // Reset transition
+        modal.style.transform = `translateY(0) scale(1)`; // Reset position and scale
+      }
+    });
+  }
+
   transitionToMode(mode) {
     if (this.currentModal) {
       const isMobile = mode === "mobile";
@@ -60,6 +102,12 @@ class Clay {
       this.currentModal.classList.add(mode);
       this.currentModal.style.transition =
         "transform 0.3s ease, opacity 0.3s ease"; // Set transition
+
+      // Zoom in effect
+      this.currentModal.style.transform = "scale(0.5)"; // Start scaled down
+      setTimeout(() => {
+        this.currentModal.style.transform = "scale(1)"; // Zoom in
+      }, 10);
 
       if (isMobile) {
         this.currentModal.style.transform = "translateY(100%)"; // Move to bottom
@@ -81,11 +129,18 @@ class Clay {
 
   closeModal(modal) {
     modal.classList.remove("show"); // Remove animation class
+    modal.style.transition = "transform 0.3s ease, opacity 0.3s ease"; // Set transition for closing
+    modal.style.transform = "scale(0.5)"; // Zoom out effect
     setTimeout(() => {
       modal.style.display = "none";
       modal.remove(); // Remove modal from DOM
       this.currentModal = null; // Reset current modal
       this.removeLoading(); // Remove loading indicator and shadow
+      console.log(
+        `Modal closed in ${
+          window.innerWidth < 768 ? "mobile" : "desktop"
+        } mode.`
+      );
     }, 300); // Match duration of CSS transition
   }
 
