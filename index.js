@@ -40,7 +40,7 @@ class Clay {
       <div class="clay-modal-content">
         <div class="modal-header">
           <span class="modal-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
               <g fill="none" stroke="currentColor" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-width="2"/>
                 <path stroke-width="3" d="M12 8h.01v.01H12z"/>
