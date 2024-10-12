@@ -209,14 +209,14 @@ class Clay {
     style.innerHTML = `
       @font-face {
         font-family: 'Fredoka-Bold';
-        src: url('assets/fonts/Fredoka_Condensed-Bold.ttf') format('truetype');
+        src: url(' https://unpkg.com/@paywithclay/inline-js/assets/fonts/Fredoka_Condensed-Bold.ttf') format('truetype');
         font-weight: bold;
         font-style: normal;
       }
 
       @font-face {
         font-family: 'Fredoka-Light';
-        src: url('assets/fonts/Fredoka-Light.ttf') format('truetype');
+        src: url(' https://unpkg.com/@paywithclay/inline-js/assets/fonts/Fredoka-Light.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
       }
