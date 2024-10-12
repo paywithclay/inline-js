@@ -27,6 +27,20 @@ class Clay {
         <button id="clay-confirm-button">Confirm Payment</button>
       </div>`;
 
+    // Gesture handling
+    let startY;
+    m.addEventListener("touchstart", (e) => {
+      startY = e.touches[0].clientY;
+    });
+
+    m.addEventListener("touchmove", (e) => {
+      const moveY = e.touches[0].clientY;
+      if (moveY - startY > 50) {
+        // Swipe down
+        this.closeModal(m);
+      }
+    });
+
     m.querySelector(".clay-close").onclick = () => {
       this.closeModal(m);
     };
@@ -102,27 +116,24 @@ class Clay {
         position: fixed;
         z-index: 1001;
         left: 0;
-        top: 0; /* Changed from bottom to top for centering */
+        bottom: 0;
         width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
-        transition: opacity 0.3s ease; /* Fade effect */
+        height: auto;
+        background-color: #fefefe;
+        border-radius: 30px 30px 0 0;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease; /* Added transition */
+        transform: translateY(100%); /* Start off-screen */
       }
       .clay-modal.show {
-        opacity: 1; /* Show modal */
+        transform: translateY(0); /* Slide in */
+      }
+      .clay-modal.dark {
+        background-color: #333; /* Dark mode background */
+        color: #fff; /* Dark mode text color */
       }
       .clay-modal-content {
-        background-color: #fefefe;
-        border-radius: 40px; /* Increased rounded edges */
         padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transform: scale(0); /* Start scaled down */
-        transition: transform 0.3s ease; /* Zoom effect */
-      }
-      .clay-modal.show .clay-modal-content {
-        transform: scale(1); /* Zoom in */
       }
       .clay-close {
         color: #aaa;
@@ -204,7 +215,7 @@ class Clay {
         bottom: 0;
         width: 100%;
         height: auto;
-        border-radius: 40px 40px 0 0; /* Increased rounded edges for bottom sheet */
+        border-radius: 30px 30px 0 0;
         transition: transform 0.3s ease;
         transform: translateY(100%); /* Start off-screen */
       }
@@ -219,7 +230,7 @@ class Clay {
         transform: translate(-50%, -50%);
         width: 400px; /* Example width */
         height: auto;
-        border-radius: 40px; /* Increased rounded edges for popup */
+        border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
     `;
