@@ -227,8 +227,8 @@ class Clay {
 
       .clay-modal.desktop {
         width: 400px; /* Set a fixed width for the desktop modal */
-        left: 40%; /* Center horizontally */
-        top: 50%; /* Center vertically */
+        left: 30%; /* Center horizontally */
+        top: 40%; /* Center vertically */
         border-radius: 30px; /* Rounded corners */
       }
 
