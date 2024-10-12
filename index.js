@@ -142,7 +142,7 @@ class Clay {
   addStyles() {
     const style = document.createElement("style");
     style.innerHTML = `
-      .clay-modal {
+      .clay-modal.mobile {
         display: none;
         position: fixed;
         z-index: 1001;
@@ -152,18 +152,23 @@ class Clay {
         border-radius: 30px 30px 0 0;
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s ease; /* Added transition */
-      }
-      .clay-modal.mobile {
         left: 0;
         bottom: 0; /* Position at the bottom for mobile */
         border-radius: 30px 30px 0 0; /* Rounded top corners */
       }
       .clay-modal.desktop {
+        display: none;
+        position: fixed;
+        z-index: 1001;
         left: 50%; /* Center horizontally */
         top: 50%; /* Center vertically */
         transform: translate(-50%, -50%); /* Adjust for centering */
-        width: 400px; /* Set a fixed width for the desktop modal */
-        border-radius: 10px; /* Rounded corners for desktop */
+        width: 100%;
+        height: auto;
+        background-color: #fefefe; /* Light mode background */
+        border-radius: 30px 30px 0 0;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease; /* Added transition */
       }
       .clay-modal.dark {
         background-color: #333; /* Dark mode background */
@@ -203,7 +208,7 @@ class Clay {
         transform: translate(-50%, -50%);
         width: 80px;
         height: 80px;
-        z-index: 1002; /* Above shadow */
+        z-index: 1000; /* Above shadow */
       }
       .lds-ripple div {
         position: absolute;
