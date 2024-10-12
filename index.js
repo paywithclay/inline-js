@@ -185,19 +185,6 @@ class Clay {
         background-color: rgba(0, 0, 0, 0.7); /* Shadow covering entire page */
         z-index: 1000; /* Below loading and modal */
       }
-
-      /* Media query for mobile devices */
-      @media (max-width: 768px) {
-        .clay-modal {
-          left: 0;
-          bottom: 0;
-          top: auto; /* Reset top for bottom sheet */
-          width: 100%; /* Full width for bottom sheet */
-          height: auto; /* Auto height for bottom sheet */
-          border-radius: 10px 10px 0 0; /* Rounded corners at the top */
-          box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Shadow for bottom sheet */
-        }
-      }
     `;
     document.head.appendChild(style);
   }
