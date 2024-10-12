@@ -46,16 +46,21 @@ class Clay {
     shadow.className = "shadow";
     document.body.appendChild(shadow);
 
-    setTimeout(() => {
-      this.createPaymentModal(); // Show the payment modal after loading
-      loading.remove(); // Remove loading indicator
-      shadow.remove(); // Remove shadow
-    }, 2000); // Simulate a delay for loading
+    // Show the payment modal after loading
+    this.createPaymentModal();
   }
 
   closeModal(modal) {
     modal.style.display = "none";
     modal.remove(); // Remove modal from DOM
+    this.removeLoading(); // Remove loading indicator and shadow
+  }
+
+  removeLoading() {
+    const loading = document.querySelector(".loading");
+    const shadow = document.querySelector(".shadow");
+    if (loading) loading.remove(); // Remove loading indicator
+    if (shadow) shadow.remove(); // Remove shadow
   }
 
   createPaymentButton() {
