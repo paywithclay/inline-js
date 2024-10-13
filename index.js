@@ -440,7 +440,7 @@ class Clay {
  .gateway-options {
   margin-top: 20px;
   display: flex;
-  justify-content: space-around; /* Align items to the center */
+  justify-content: space-between; /* Align items to the center */
   flex-wrap: wrap; /* Allow wrapping for responsive behavior if needed */
 }
 
