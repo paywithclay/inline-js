@@ -107,10 +107,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ### **Reminder:**
 
 **Clay InlineJS is still under development** and is not yet recommended for production use. Please feel free to experiment with it in a test or development environment and provide feedback as we continue to improve the library.
-```
-
-### Key Highlights:
-- Clear disclaimer about the early-stage development.
-- Easy-to-follow installation and basic usage instructions.
-- Emphasizes the community and support channels.
-  
