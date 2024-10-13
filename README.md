@@ -1,4 +1,3 @@
-```markdown
 # Clay InlineJS - Payment Integration Library
 
 [![NPM Downloads](https://img.shields.io/npm/dw/@paywithclay/inline-js)](https://www.npmjs.com/package/@paywithclay/inline-js)
@@ -26,7 +25,7 @@ This library is currently in early development and is still being worked on. Alt
 
 You can start experimenting by installing **Clay InlineJS** via npm:
 
-```bash
+```
 npm install @paywithclay/inline-js
 ```
 
