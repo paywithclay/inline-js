@@ -164,7 +164,7 @@ class Clay {
           </div>
 
            <div class="gateway-option">
-               <img src="https:encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4L0GRpBv2Ax97bi8-NOhGouVcn4OqUW0tYQ&s" alt="PawaPay" />
+               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4L0GRpBv2Ax97bi8-NOhGouVcn4OqUW0tYQ&s" alt="PawaPay" />
                <span>PawaPay</span>
     
              </div>
