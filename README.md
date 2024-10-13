@@ -34,7 +34,7 @@ npm install @paywithclay/inline-js
 Once installed, simply include the script in your HTML or JavaScript file and set up the payment button as shown below:
 
 ```html
-<script src="https://unpkg.com/@paywithclay/inline-js@1.0.87/index.js"></script>
+<script src="https://unpkg.com/@paywithclay/inline-js"></script>
 
 <!-- Payment button setup -->
 <UseClay amount="1000" currency="NGN" key="YOUR_PUBLIC_KEY" />
