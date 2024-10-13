@@ -37,7 +37,15 @@ Once installed, simply include the script in your HTML or JavaScript file and se
 <script src="https://unpkg.com/@paywithclay/inline-js"></script>
 
 <!-- Payment button setup -->
-<UseClay amount="1000" currency="NGN" key="YOUR_PUBLIC_KEY" />
+<script>
+      const paymentButton = new Clay(
+        167282270,
+        "NGN",
+        "GAFA61271881YWHHHH",
+        "dark"
+      ).createPaymentButton();
+      document.body.appendChild(paymentButton);
+    </script>
 ```
 
 Or if you prefer to initialize it via JavaScript:
