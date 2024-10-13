@@ -162,6 +162,12 @@ class Clay {
             <img src="https://pbs.twimg.com/profile_images/1445317527173804034/KQFHzQWE_400x400.png" alt="Mono" />
             <span>Mono</span>
           </div>
+
+           <div class="gateway-option">
+               <img src="https:encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4L0GRpBv2Ax97bi8-NOhGouVcn4OqUW0tYQ&s" alt="PawaPay" />
+               <span>PawaPay</span>
+    
+             </div>
           
            <div class="gateway-option">
            <img src="https://fincra.com/wp-content/uploads/2022/10/cropped-Favicon.png" alt="Fincra" />
