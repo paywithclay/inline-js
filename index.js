@@ -179,7 +179,8 @@ class Clay {
       fetch("https://pulse.paywithclay.co/e", {
               method: "POST"
               , headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
+                  'Authorization': `Bearer ${this.publicKey}`
               , }
               , body: JSON.stringify(trackingData)
           , })
@@ -280,7 +281,8 @@ showWalletOptions() {
     fetch(apiUrl, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json', // Ensure the request is sent as JSON
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.publicKey}`
         },
         body: JSON.stringify(requestBody) // Convert the data to JSON
     })
@@ -292,25 +294,64 @@ showWalletOptions() {
     })
     .then(data => {
         const paymentLink = data.link; // Extract the payment link from the response
+        const txRef = data.txRef; // Assuming your API returns a payment ID
+
         window.open(paymentLink, '_blank'); // Open the payment link in a new tab
+
+        // Start polling for payment status
+        this.pollPaymentStatus(txRef);
     })
     .catch(error => {
-        console.error('Error fetching payment link:', error); // Log any errors
     });
+}
+
+// New method to poll payment status
+pollPaymentStatus(txRef) {
+    const interval = setInterval(() => {
+        // Call your API to check payment status
+        fetch(`${this.baseUrl}/payment-status?txRef=${txRef}`, {
+            method: 'GET', // Use GET method
+            headers: {
+                'Content-Type': 'application/json', // Set appropriate headers
+                'Authorization': `Bearer ${this.publicKey}` // Ensure this is valid
+            }
+        })
+        .then(response => {
+            if (response.ok) { // Only handle successful responses (200)
+                return response.json(); // Parse the JSON response
+            } else {
+                throw new Error('Payment status not successful'); // Handle non-200 responses
+            }
+        })
+        .then(data => {
+            
+            // Instead of checking for data.type, check for the status
+            if (data.status) {
+                this.handlePaymentMessage(data);
+                
+                // If payment is successful based on the status, stop polling
+                if (data.status === 'success') {
+                    clearInterval(interval);
+                }
+            } 
+        })
+        .catch(error => {
+            
+            // Optionally handle retries for non-200 responses if needed
+        });
+    }, 5000); // Poll every 5 seconds
 }
 
 
 
 
-
-
 handlePaymentMessage(messageData) {
-    // Check if the message type is 'success' or 'failure'
-    if (messageData.type === 'success') {
+    // Check if the message status is 'success' or 'failure'
+    if (messageData.status === 'success') {
         this.hideLoadingSpinner();
         this.showWalletOptions();
         this.eventEmitter.emit('paymentSuccess', messageData); // Emit success event
-    } else if (messageData.type === 'failure') {
+    } else if (messageData.status === 'failure') {
         this.eventEmitter.emit('paymentFailure', messageData); // Emit failure event
     }
 }
