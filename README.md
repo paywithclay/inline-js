@@ -3,7 +3,6 @@
 [![NPM Downloads](https://img.shields.io/npm/dw/@paywithclay/inline-js)](https://www.npmjs.com/package/@paywithclay/inline-js)
 [![License](https://img.shields.io/npm/l/@paywithclay/inline-js)](LICENSE)
 
-[![Build][build-status-image]][build-status-url] [![Codecov][codecov-image]][codecov-url] [![ReportCard][reportcard-image]][reportcard-url] [![GoDoc][godoc-image]][godoc-url] [![License][license-image]][license-url]
 
 
 **Clay InlineJS** is a simple, open-source JavaScript library that helps developers integrate multiple payment gateways with minimal code. Whether you're working with Paystack, Flutterwave, or other supported gateways, Clay simplifies the process by offering a unified interface for payments.
