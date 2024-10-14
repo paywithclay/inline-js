@@ -88,7 +88,7 @@ Example:
 const paymentButton = new Clay(
   5000,          // Amount in currency subunit (e.g., 5000 kobo = ₦50)
   'NGN',         // Currency
-  'YOUR_PUBLIC_KEY',  // Your payment public key
+  'CLAY_PUBLIC_KEY',  // Your clay public key
   'dark'         // Theme (optional)
 );
 paymentButton.createPaymentButton();  // Create and append button
