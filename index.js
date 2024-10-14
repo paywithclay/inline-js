@@ -9,6 +9,7 @@ class Clay {
         buttonTextColor,
         baseUrl: 'http://localhost:8080/pay'
     });
+    this.key = this.generateEventId();
     this.gestureController = new GestureController();
     this.addStyles();
     this.eventEmitter = new EventEmitter();
@@ -262,58 +263,43 @@ showWalletOptions() {
   }
 
   selectWallet(walletName) {
-    const keys = this.generateEventId();
-    
-    // Initialize WebSocket
-    this.ws = new WebSocket(`ws://localhost:8080/ws?key=${keys}`);
+    // Construct the API URL (base URL only)
+    const apiUrl = `${this.baseUrl}`;
 
-    this.ws.onopen = () => {
-        console.log('WebSocket connection opened');
+    const amountValue = Number(this.amount);
+
+    // Prepare the request body as JSON
+    const requestBody = {
+        wallet: walletName,
+        key: this.key,
+        amount: amountValue,
+        currency: this.currency,
+        public_key: this.publicKey
     };
 
-    this.ws.onmessage = (event) => {
-        try {
-            const messageData = JSON.parse(event.data);
-            this.handlePaymentMessage(messageData);
-        } catch (error) {
-            console.error('Error parsing WebSocket message:', error);
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json', // Ensure the request is sent as JSON
+        },
+        body: JSON.stringify(requestBody) // Convert the data to JSON
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    };
-
-    this.ws.onclose = () => {
-        console.log('WebSocket connection closed');
-    };
-
-    this.ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
-    };
-
-    // Automatically close the WebSocket after 30 minutes (1,800,000 milliseconds)
-    setTimeout(() => {
-        if (this.ws.readyState === WebSocket.OPEN) {
-            this.ws.close();
-            console.log('WebSocket connection closed due to 30 minutes timeout');
-        }
-    }, 1800000);
-
-    // Construct API URL and make the request
-    const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}&public_key=${this.publicKey}`;
-
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const paymentLink = data.link;
-            window.open(paymentLink, '_blank');
-        })
-        .catch(error => {
-            console.error('Error fetching payment link:', error);
-        });
+        return response.json(); // Parse the JSON response
+    })
+    .then(data => {
+        const paymentLink = data.link; // Extract the payment link from the response
+        window.open(paymentLink, '_blank'); // Open the payment link in a new tab
+    })
+    .catch(error => {
+        console.error('Error fetching payment link:', error); // Log any errors
+    });
 }
+
+
 
 
 
