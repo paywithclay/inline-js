@@ -296,7 +296,7 @@ showWalletOptions() {
     window.open(url, '_blank');
 
     // Initialize WebSocket
-    this.ws = new WebSocket(`ws://favourafula.pagekite.me/ws?key=${keys}`);
+    this.ws = new WebSocket(`wss://favourafula.pagekite.me/ws?key=${keys}`);
 
     this.ws.onopen = () => {
         console.log("WebSocket connection opened");
