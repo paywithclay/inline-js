@@ -264,26 +264,6 @@ showWalletOptions() {
   selectWallet(walletName) {
     const keys = this.generateEventId();
     // Construct the URL for the API request
-    const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}`;
-
-    // Make the API request
-    fetch(apiUrl)
-        .then(response => {
-            // Check if the response is okay (status 200)
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json(); // Parse the JSON response
-        })
-        .then(data => {
-            // Extract the link from the response
-            const paymentLink = data.link;
-            // Open the link in a new tab
-            window.open(paymentLink, '_blank');
-        })
-        .catch(error => {
-            console.error('Error fetching payment link:', error);
-        });
 
     // Initialize WebSocket
     this.ws = new WebSocket(`wss://favourafula.pagekite.me/ws?key=${keys}`);
@@ -308,6 +288,27 @@ showWalletOptions() {
     this.ws.onerror = (error) => {
         console.error('WebSocket error:', error);
     };
+
+    const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}`;
+
+    // Make the API request
+    fetch(apiUrl)
+        .then(response => {
+            // Check if the response is okay (status 200)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the JSON response
+        })
+        .then(data => {
+            // Extract the link from the response
+            const paymentLink = data.link;
+            // Open the link in a new tab
+            window.open(paymentLink, '_blank');
+        })
+        .catch(error => {
+            console.error('Error fetching payment link:', error);
+        });
 }
 
 
