@@ -14,6 +14,7 @@ class Clay {
 
     this.isPageVisible = true; // Track the page visibility
     this.messageToHandle = null; // Store the message if the page is not visible
+    this.eventEmitter = new EventEmitter();
     this.initVisibilityListener(); // Initialize visibility listener
 }
 
@@ -296,7 +297,7 @@ showWalletOptions() {
     window.open(url, '_blank');
 
     // Initialize WebSocket
-    this.ws = new WebSocket(`wss://favourafula.pagekite.me/ws?key=${keys}`);
+    this.ws = new WebSocket(`ws://localhost:8080/ws?key=${keys}`);
 
     this.ws.onopen = () => {
         console.log("WebSocket connection opened");
@@ -307,17 +308,8 @@ showWalletOptions() {
             const messageData = JSON.parse(event.data); // Parse the JSON message
             console.log(messageData);
 
-            // Check if the message type is 'success'
-            if (messageData.type === 'success') {
-                if (this.isPageVisible) {
-                    // Handle the message immediately if the page is visible
-                    this.hideLoadingSpinner();
-                    this.showWalletOptions();
-                } else {
-                    // Store the message to handle later
-                    this.messageToHandle = messageData;
-                }
-            }
+            // Check the message type and trigger appropriate events
+            this.handlePaymentMessage(messageData);
         } catch (error) {
             console.error("Failed to parse message:", error);
         }
@@ -332,10 +324,39 @@ showWalletOptions() {
     };
 }
 
+handlePaymentMessage(messageData) {
+    // Check if the message type is 'success' or 'failure'
+    if (messageData.type === 'success') {
+        this.hideLoadingSpinner();
+        this.showWalletOptions();
+        this.eventEmitter.emit('paymentSuccess', messageData); // Emit success event
+    } else if (messageData.type === 'failure') {
+        this.hideLoadingSpinner();
+        this.showWalletOptions();
+        this.eventEmitter.emit('paymentFailure', messageData); // Emit failure event
+    } else {
+        console.warn('Unknown message type:', messageData.type);
+    }
+
+    // Handle visibility case
+    if (!this.isPageVisible) {
+        this.messageToHandle = messageData; // Store the message to handle later
+    }
+}
+
 // Method to handle messages (to be called when the page is visible)
 handleMessage(messageData) {
     this.hideLoadingSpinner();
     this.showWalletOptions();
+}
+
+// Event listener methods
+onPaymentSuccess(callback) {
+    this.eventEmitter.on('paymentSuccess', callback);
+}
+
+onPaymentFailure(callback) {
+    this.eventEmitter.on('paymentFailure', callback);
 }
 
 
@@ -1062,6 +1083,25 @@ z-index: 1000
     document.head.appendChild(style)
 }
 
+}
+
+class EventEmitter {
+  constructor() {
+      this.events = {};
+  }
+
+  on(event, listener) {
+      if (!this.events[event]) {
+          this.events[event] = [];
+      }
+      this.events[event].push(listener);
+  }
+
+  emit(event, data) {
+      if (this.events[event]) {
+          this.events[event].forEach(listener => listener(data));
+      }
+  }
 }
 
 // Gesture controller class to handle swipe gestures
