@@ -3,7 +3,7 @@ class Clay {
     Object.assign(this, {
         amount: a,
         currency: c,
-        key: k,
+        publicKey: k,
         mode,
         buttonBgColor,
         buttonTextColor,
@@ -19,7 +19,7 @@ class Clay {
 
   pay() {
       console.log(
-          `Initiating payment of ${this.amount} ${this.currency} using key: ${this.key}`
+          `Initiating payment of ${this.amount} ${this.currency} using key: ${this.publicKey}`
       );
   }
 
@@ -175,7 +175,7 @@ class Clay {
       , };
 
       // Send tracking data to the specified URL
-      fetch("https://pulse.paywithclay.io/e", {
+      fetch("https://pulse.paywithclay.co/e", {
               method: "POST"
               , headers: {
                   "Content-Type": "application/json"
@@ -297,7 +297,7 @@ showWalletOptions() {
     }, 1800000);
 
     // Construct API URL and make the request
-    const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}`;
+    const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}&public_key=${this.publicKey}`;
 
     fetch(apiUrl)
         .then(response => {
