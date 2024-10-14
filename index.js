@@ -277,6 +277,8 @@ showWalletOptions() {
             this.handlePaymentMessage(messageData);
         } catch (error) {
             console.error('Error parsing WebSocket message:', error);
+        } finally {
+            this.ws.close();
         }
     };
 
@@ -324,12 +326,6 @@ handlePaymentMessage(messageData) {
         this.hideLoadingSpinner();
         this.showWalletOptions();
         this.eventEmitter.emit('paymentSuccess', messageData); // Emit success event
-
-        // Close the WebSocket connection upon success
-        if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-            this.ws.close();
-            console.log('WebSocket connection closed after payment success');
-        }
     } else if (messageData.type === 'failure') {
         this.eventEmitter.emit('paymentFailure', messageData); // Emit failure event
     }
