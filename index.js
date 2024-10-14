@@ -7,7 +7,7 @@ class Clay {
         mode,
         buttonBgColor,
         buttonTextColor,
-        baseUrl: 'https://favourafula.pagekite.me/pay'
+        baseUrl: 'http://localhost:8080/pay'
     });
     this.gestureController = new GestureController();
     this.addStyles();
