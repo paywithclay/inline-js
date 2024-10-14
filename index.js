@@ -277,8 +277,6 @@ showWalletOptions() {
             this.handlePaymentMessage(messageData);
         } catch (error) {
             console.error('Error parsing WebSocket message:', error);
-        } finally {
-            this.ws.close();
         }
     };
 
@@ -296,7 +294,7 @@ showWalletOptions() {
             this.ws.close();
             console.log('WebSocket connection closed due to 30 minutes timeout');
         }
-    }, 1800000); // 30 minutes in milliseconds
+    }, 1800000);
 
     // Construct API URL and make the request
     const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}`;
