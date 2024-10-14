@@ -67,7 +67,7 @@ Or if you prefer to initialize it via JavaScript:
 
 ```javascript
 // Example usage in JavaScript
-const paymentButton = new Clay(1000, 'NGN', 'YOUR_PUBLIC_KEY').createPaymentButton();
+const paymentButton = new Clay(1000, 'NGN', 'CLAY_PUBLIC_KEY').createPaymentButton();
 document.body.appendChild(paymentButton);
 ```
 
