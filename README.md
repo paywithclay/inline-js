@@ -38,31 +38,32 @@ Once installed, simply include the script in your HTML or JavaScript file and se
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clays Payment Example</title>
+    <title>Clay Payment Example</title>
     <script src="https://unpkg.com/@paywithclay/inline-js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Welcome to Clay Payment System</h1>
+    <div id="payment-option">Pay with Clay</div>
     <script>
-      const clay = new Clay(15000, "NGN", "<CLAY_PUBLIC_KEY>", "dark");
+        const clay = new Clay(1500, "NGN", "CLAY_TEST-E8F5jLh6AQyGf78Dhmk2Yt7yPs3UkFdR4qS9GvLxWcO", "dark");
+        document.getElementById("payment-option").onclick = () => {
+            clay.clayPop();
+        };
+        clay.onClayPopOpen(() => {
+            console.log("Clay pop open");
+        });
 
-      clay.onPaymentSuccess(() => {
-        console.log("Payment successful!");
-        // Perform actions on payment success
-      });
+        clay.onClayPopClose(() => {
+            console.log("Clay pop close");
+        });
 
-      clay.onPaymentFailure(() => {
-        console.log("Payment failed!");
-        // Perform actions on payment failure
-      });
-
-      document.body.appendChild(clay.createPaymentButton());
     </script>
-  </body>
+</body>
 </html>
+
 ```
 
 Or if you prefer to initialize it via JavaScript:
