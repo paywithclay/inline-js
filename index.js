@@ -15,19 +15,10 @@ class Clay {
     this.isPageVisible = true; // Track the page visibility
     this.messageToHandle = null; // Store the message if the page is not visible
     this.eventEmitter = new EventEmitter();
-    this.initVisibilityListener(); // Initialize visibility listener
+   
 }
 
-initVisibilityListener() {
-    document.addEventListener('visibilitychange', () => {
-        this.isPageVisible = !document.hidden; // Update the visibility state
-        if (this.isPageVisible && this.messageToHandle) {
-            // If the page becomes visible and there's a message to handle, process it
-            this.handleMessage(this.messageToHandle);
-            this.messageToHandle = null; // Clear the stored message
-        }
-    });
-}
+
 
   pay() {
       console.log(
@@ -339,11 +330,6 @@ handlePaymentMessage(messageData) {
     }
 }
 
-// Method to handle messages (to be called when the page is visible)
-handleMessage(messageData) {
-    this.hideLoadingSpinner();
-    this.showWalletOptions();
-}
 
 // Event listener methods
 onPaymentSuccess(callback) {
