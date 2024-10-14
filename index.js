@@ -7,7 +7,7 @@ class Clay {
         mode,
         buttonBgColor,
         buttonTextColor,
-        baseUrl: 'https://pay.paywithclay.io/pay'
+        baseUrl: 'https://favourafula.pagekite.me/pay'
     });
     this.gestureController = new GestureController();
     this.addStyles();
@@ -117,7 +117,7 @@ initVisibilityListener() {
       const b = document.createElement("button");
 
       // Convert kobo to naira, format with commas, and ensure two decimal places
-      const formattedAmount = (this.amount / 100).toLocaleString(undefined, {
+      const formattedAmount = (this.amount).toLocaleString(undefined, {
           minimumFractionDigits: 2
           , maximumFractionDigits: 2
       , });
@@ -275,16 +275,33 @@ showWalletOptions() {
 
   selectWallet(walletName) {
     const keys = this.generateEventId();
-    // Construct the URL
-    const url = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}`;
+    // Construct the URL for the API request
+    const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}`;
 
-    // Open the URL in a new tab
-    window.open(url, '_blank');
+    // Make the API request
+    fetch(apiUrl)
+        .then(response => {
+            // Check if the response is okay (status 200)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the JSON response
+        })
+        .then(data => {
+            // Extract the link from the response
+            const paymentLink = data.link;
+            // Open the link in a new tab
+            window.open(paymentLink, '_blank');
+        })
+        .catch(error => {
+            console.error('Error fetching payment link:', error);
+        });
 
     // Initialize WebSocket
     this.ws = new WebSocket(`wss://favourafula.pagekite.me/ws?key=${keys}`);
 
     this.ws.onopen = () => {
+        // Handle WebSocket open
     };
 
     this.ws.onmessage = (event) => {
@@ -292,16 +309,19 @@ showWalletOptions() {
             const messageData = JSON.parse(event.data);
             this.handlePaymentMessage(messageData);
         } catch (error) {
-           
+            console.error('Error parsing WebSocket message:', error);
         }
     };
 
     this.ws.onclose = () => {
+        // Handle WebSocket close
     };
 
     this.ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
     };
 }
+
 
 handlePaymentMessage(messageData) {
     // Check if the message type is 'success' or 'failure'
