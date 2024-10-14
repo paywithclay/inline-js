@@ -263,13 +263,12 @@ showWalletOptions() {
 
   selectWallet(walletName) {
     const keys = this.generateEventId();
-    // Construct the URL for the API request
-
+    
     // Initialize WebSocket
     this.ws = new WebSocket(`wss://favourafula.pagekite.me/ws?key=${keys}`);
 
     this.ws.onopen = () => {
-        // Handle WebSocket open
+        console.log('WebSocket connection opened');
     };
 
     this.ws.onmessage = (event) => {
@@ -282,28 +281,33 @@ showWalletOptions() {
     };
 
     this.ws.onclose = () => {
-        // Handle WebSocket close
+        console.log('WebSocket connection closed');
     };
 
     this.ws.onerror = (error) => {
         console.error('WebSocket error:', error);
     };
 
+    // Automatically close the WebSocket after 30 minutes (1,800,000 milliseconds)
+    setTimeout(() => {
+        if (this.ws.readyState === WebSocket.OPEN) {
+            this.ws.close();
+            console.log('WebSocket connection closed due to 30 minutes timeout');
+        }
+    }, 1800000); // 30 minutes in milliseconds
+
+    // Construct API URL and make the request
     const apiUrl = `${this.baseUrl}?wallet=${encodeURIComponent(walletName)}&key=${keys}&amount=${this.amount}&currency=${this.currency}`;
 
-    // Make the API request
     fetch(apiUrl)
         .then(response => {
-            // Check if the response is okay (status 200)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json(); // Parse the JSON response
+            return response.json();
         })
         .then(data => {
-            // Extract the link from the response
             const paymentLink = data.link;
-            // Open the link in a new tab
             window.open(paymentLink, '_blank');
         })
         .catch(error => {
@@ -312,16 +316,25 @@ showWalletOptions() {
 }
 
 
+
+
 handlePaymentMessage(messageData) {
     // Check if the message type is 'success' or 'failure'
     if (messageData.type === 'success') {
         this.hideLoadingSpinner();
         this.showWalletOptions();
         this.eventEmitter.emit('paymentSuccess', messageData); // Emit success event
+
+        // Close the WebSocket connection upon success
+        if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+            this.ws.close();
+            console.log('WebSocket connection closed after payment success');
+        }
     } else if (messageData.type === 'failure') {
         this.eventEmitter.emit('paymentFailure', messageData); // Emit failure event
     }
 }
+
 
 
 // Event listener methods
