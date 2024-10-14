@@ -331,8 +331,6 @@ handlePaymentMessage(messageData) {
         this.showWalletOptions();
         this.eventEmitter.emit('paymentSuccess', messageData); // Emit success event
     } else if (messageData.type === 'failure') {
-        this.hideLoadingSpinner();
-        this.showWalletOptions();
         this.eventEmitter.emit('paymentFailure', messageData); // Emit failure event
     } else {
         console.warn('Unknown message type:', messageData.type);
