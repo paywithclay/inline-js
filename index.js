@@ -7,7 +7,7 @@ class Clay {
         mode,
         buttonBgColor,
         buttonTextColor,
-        baseUrl: 'http://localhost:8080/pay'
+        baseUrl: 'https://favourafula.pagekite.me/pay'
     });
     this.key = this.generateEventId();
     this.gestureController = new GestureController();
