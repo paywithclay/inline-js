@@ -265,7 +265,7 @@ showWalletOptions() {
     const keys = this.generateEventId();
     
     // Initialize WebSocket
-    this.ws = new WebSocket(`wss://favourafula.pagekite.me/ws?key=${keys}`);
+    this.ws = new WebSocket(`ws://localhost:8080/ws?key=${keys}`);
 
     this.ws.onopen = () => {
         console.log('WebSocket connection opened');
