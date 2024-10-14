@@ -11,9 +11,6 @@ class Clay {
     });
     this.gestureController = new GestureController();
     this.addStyles();
-
-    this.isPageVisible = true; // Track the page visibility
-    this.messageToHandle = null; // Store the message if the page is not visible
     this.eventEmitter = new EventEmitter();
    
 }
@@ -322,11 +319,6 @@ handlePaymentMessage(messageData) {
         this.eventEmitter.emit('paymentSuccess', messageData); // Emit success event
     } else if (messageData.type === 'failure') {
         this.eventEmitter.emit('paymentFailure', messageData); // Emit failure event
-    } 
-
-    // Handle visibility case
-    if (!this.isPageVisible) {
-        this.messageToHandle = messageData; // Store the message to handle later
     }
 }
 
