@@ -1,6 +1,6 @@
 {
   "name": "@paywithclay/inline-js",
-  "version": "1.0.116",
+  "version": "1.0.117",
   "description": "The Friendly Payment Gateway for Developers",
   "main": "index.js",
   "type": "module",
