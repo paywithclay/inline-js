@@ -99,7 +99,6 @@ initVisibilityListener() {
           modal.remove(); // Remove modal from DOM
           this.currentModal = null; // Reset current modal
           this.removeShadow();
-          console.log(`Modal closed in ${isMobile ? "mobile" : "desktop"} mode.`);
           this.trackEvent("MODAL_CLOSE"); // Track modal close event
       }, 300); // Match duration of CSS transition
   }
@@ -149,7 +148,6 @@ initVisibilityListener() {
           container.innerHTML = ""; // Clear previous content
           container.appendChild(button);
       } else {
-          console.error(`Container with ID ${containerId} not found.`);
       }
   }
 
@@ -198,11 +196,9 @@ initVisibilityListener() {
           , })
           .then((response) => {
               if (!response.ok) {
-                  console.error("Tracking event failed:", response.statusText);
               }
           })
           .catch((error) => {
-              console.error("Error sending tracking event:", error);
           });
   }
 
@@ -224,11 +220,6 @@ initVisibilityListener() {
           this.currentModal = this.createModalElement();
           document.body.appendChild(this.currentModal);
           this.showModal(this.currentModal);
-          console.log(
-              `Modal opened in ${
-      window.innerWidth < 768 ? "mobile" : "desktop"
-    } mode.`
-          );
           this.trackEvent("MODAL_OPEN");
       }
 
@@ -256,9 +247,6 @@ initVisibilityListener() {
       const walletOptions = this.currentModal.querySelector('.wallet-options');
       if (walletOptions) {
           walletOptions.style.display = 'none';
-          console.log("Wallet options hidden.");
-      } else {
-          console.warn("No wallet options found to hide.");
       }
   }
 
@@ -282,9 +270,6 @@ showWalletOptions() {
       const loadingSpinner = this.currentModal.querySelector('.loading-spinner');
       if (loadingSpinner) {
           loadingSpinner.style.display = 'flex';
-          console.log("Loading spinner shown.");
-      } else {
-          console.warn("No loading spinner found to show.");
       }
   }
 
@@ -300,27 +285,21 @@ showWalletOptions() {
     this.ws = new WebSocket(`wss://favourafula.pagekite.me/ws?key=${keys}`);
 
     this.ws.onopen = () => {
-        console.log("WebSocket connection opened");
     };
 
     this.ws.onmessage = (event) => {
         try {
-            const messageData = JSON.parse(event.data); // Parse the JSON message
-            console.log(messageData);
-
-            // Check the message type and trigger appropriate events
+            const messageData = JSON.parse(event.data);
             this.handlePaymentMessage(messageData);
         } catch (error) {
-            console.error("Failed to parse message:", error);
+           
         }
     };
 
     this.ws.onclose = () => {
-        console.log("WebSocket connection closed");
     };
 
     this.ws.onerror = (error) => {
-        console.error("WebSocket error:", error);
     };
 }
 
@@ -332,9 +311,7 @@ handlePaymentMessage(messageData) {
         this.eventEmitter.emit('paymentSuccess', messageData); // Emit success event
     } else if (messageData.type === 'failure') {
         this.eventEmitter.emit('paymentFailure', messageData); // Emit failure event
-    } else {
-        console.warn('Unknown message type:', messageData.type);
-    }
+    } 
 
     // Handle visibility case
     if (!this.isPageVisible) {
