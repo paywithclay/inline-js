@@ -7,7 +7,7 @@ class Clay {
         mode,
         buttonBgColor,
         buttonTextColor,
-        baseUrl: 'https://0f0a-185-192-71-20.ngrok-free.app/pay'
+        baseUrl: 'https://84cd-91-230-225-7.ngrok-free.app/pay'
     });
     this.key = this.generateEventId();
     this.gestureController = new GestureController();
