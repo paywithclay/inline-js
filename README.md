@@ -34,18 +34,33 @@ npm install @paywithclay/inline-js
 Once installed, simply include the script in your HTML or JavaScript file and set up the payment button as shown below:
 
 ```html
-<script src="https://unpkg.com/@paywithclay/inline-js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clays Payment Example</title>
+    <script src="https://unpkg.com/@paywithclay/inline-js"></script>
+  </head>
+  <body>
+    <h1>Welcome to Clay Payment System</h1>
+    <script>
+      const clay = new Clay(15000, "NGN", "<CLAY_PUBLIC_KEY>", "dark");
 
-<!-- Payment button setup -->
-<script>
-      const paymentButton = new Clay(
-        167282270,
-        "NGN",
-        "GAFA61271881YWHHHH",
-        "dark"
-      ).createPaymentButton();
-      document.body.appendChild(paymentButton);
+      clay.onPaymentSuccess(() => {
+        console.log("Payment successful!");
+        // Perform actions on payment success
+      });
+
+      clay.onPaymentFailure(() => {
+        console.log("Payment failed!");
+        // Perform actions on payment failure
+      });
+
+      document.body.appendChild(clay.createPaymentButton());
     </script>
+  </body>
+</html>
 ```
 
 Or if you prefer to initialize it via JavaScript:
