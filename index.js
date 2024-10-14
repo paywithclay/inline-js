@@ -296,14 +296,18 @@ showWalletOptions() {
         const paymentLink = data.link; // Extract the payment link from the response
         const txRef = data.txRef; // Assuming your API returns a payment ID
 
-        window.open(paymentLink, '_blank'); // Open the payment link in a new tab
+        // Open a new tab and navigate to the payment link
+        let newTab = window.open(); // Create a new tab
+        newTab.location.href = paymentLink; // Set the URL of the new tab
 
         // Start polling for payment status
         this.pollPaymentStatus(txRef);
     })
     .catch(error => {
+        console.error('Error:', error);
     });
 }
+
 
 // New method to poll payment status
 pollPaymentStatus(txRef) {
