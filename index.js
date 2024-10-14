@@ -7,7 +7,7 @@ class Clay {
         mode,
         buttonBgColor,
         buttonTextColor,
-        baseUrl: 'https://favourafula.pagekite.me/pay'
+        baseUrl: 'https://0f0a-185-192-71-20.ngrok-free.app/pay'
     });
     this.key = this.generateEventId();
     this.gestureController = new GestureController();
