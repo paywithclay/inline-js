@@ -1,0 +1,76 @@
+.gateway-options {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between; /* Align items to the center */
+    flex-wrap: wrap; /* Allow wrapping for responsive behavior if needed */
+    }
+    
+    .gateway-option {
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+    align-items: center; /* Center both image and text horizontally */
+    padding: 5px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    margin: 0 5px 10px 3px; /* Horizontal space between items */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    width: 20%; /* Set a fixed width to ensure all fit on the same line */
+    text-align: center;
+    }
+    
+    .gateway-option img {
+    width: 50px; /* Adjust image size */
+    height: 50px;
+    border-radius: 6px;
+    padding: 5px;
+    border-radius: 20px;
+    margin-bottom: 5px; /* Space between image and text */
+    }
+    
+    .gateway-option span {
+    font-size: 12px; /* Adjust text size */
+    color: #ffffff;
+    font-weight: 500;
+    }
+    
+    .gateway-option:hover {
+    background-color: #252626;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+    
+    
+        .clay-modal {
+          z-index: 1001;
+          background-color: #fefefe; /* Light mode background */
+          box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
+          opacity: 0; /* Start hidden */
+          font-family: 'Fredoka', sans-serif; /* Apply Google Font */
+        }
+    
+        .clay-modal.mobile {
+          display: none;
+          position: fixed;
+          width: 100%;
+          height: auto;
+          border-radius: 30px 30px 0 0; /* Rounded top corners */
+          left: 0;
+          bottom: 0; /* Position at the bottom for mobile */
+        }
+    
+        .clay-modal.desktop {
+      display: flex;
+      position: fixed;
+      top: 20%; /* Center vertically */
+      left: 35%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Adjust position to truly center */
+      width: 400px; /* Set a fixed width for the desktop modal */
+      border-radius: 30px; /* Rounded corners */
+      z-index: 1001; /* Ensure it's above other elements */
+    }
+    
+        .clay-modal.show {
+          transform: translateY(0); /* Slide in */
+          opacity: 1; /* Fade in */
+        }
