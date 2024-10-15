@@ -5,7 +5,7 @@ class Clay {
             currency: c,
             publicKey: k,
             mode,
-            baseUrl: 'https://41c9a47ece8985c517866c27ddb52744.serveo.net/pay'
+            baseUrl: 'https://54196f4801d0c9ea10051e56c205afa3.serveo.net/pay'
         });
         this.key = this.generateEventId();
         this.gestureController = new GestureController();
