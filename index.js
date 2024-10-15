@@ -326,7 +326,7 @@ onPaymentFailure(callback) {
 
   <p style="display: block; text-align: center; margin-top: 10px; font-size: 12px;">Scan this QR Code with your phone</p>
   <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer;">  
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
       <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
           <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
           <path d="M21 13c0 3.771 0 5.657-1.172 6.828S16.771 21 13 21h-2c-3.771 0-5.657 0-6.828-1.172S3 16.771 3 13v-2c0-3.771 0-5.657 1.172-6.828S7.229 3 11 3"/>
@@ -389,25 +389,91 @@ onPaymentFailure(callback) {
   </div>
 
   <div class="modal-selected-option-paystack" style="display: none; transition: opacity 0.5s ease; opacity: 0;">
-        <div class="gateway-option">
+        <div class="current-gateway-option">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQApU1W4AukdeecItSYUAnaupxpTxdmevCRPg&s" alt="Paystack" />
-          <span>Paystack</span>
+        
         </div>
-   </div>
+        <span style="align-items: center; justify-content: center; display: flex; font-size: 16px; font-weight: bold;">Continue in Paystack</span>
+          <span style="align-items: center; justify-content: center; display: flex; margin-top: 10px; font-size: 12px; color: #808080;">Open and contnue in a new browser tab</span>
+     
+     <div style="display: flex; align-items: center;  border: 2px solid #243140; justify-content: center; margin-top: 10px; cursor: pointer; border-radius: 20px; background-color: #1e1e1e; padding: 10px; width: 50px; margin-left: auto; margin-right: auto;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+  <path fill="none" stroke="#05a6db" stroke-width="2" d="m16.289 7.208l-9.766 9.746q-.14.14-.344.13q-.204-.009-.345-.15t-.14-.334t.14-.334L15.582 6.5H6.789q-.213 0-.357-.144t-.143-.357t.143-.356t.357-.143h9.692q.343 0 .575.232t.233.576V16q0 .213-.145.356t-.356.144t-.356-.144t-.144-.356z"/>
+</svg>
+
+  <span style="color: #05a6db; font-size: 14px; font-weight: bold; margin-left: 2px;">Open</span>
+</div>
+
+          <div style="display: flex; align-items: center; justify-content: center; margin-top: 15px;  cursor: pointer;">  
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
+      <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
+          <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
+          <path d="M21 13c0 3.771 0 5.657-1.172 6.828S16.771 21 13 21h-2c-3.771 0-5.657 0-6.828-1.172S3 16.771 3 13v-2c0-3.771 0-5.657 1.172-6.828S7.229 3 11 3"/>
+      </g>
+  </svg>
+
+  
+  <span style="color: #dbdad5; font-size: 10px;">Copy Link</span>
+  
+  </div>
+   
+          </div>
 
   <div class="modal-selected-option-flutterwave" style="display: none; transition: opacity 0.5s ease; opacity: 0;">
-        <div class="gateway-option">
+        <div class="current-gateway-option">
           <img src="https://www.fintechfutures.com/files/2023/03/Flutterwave-new.jpg" alt="Flutterwave" />
-          <span>Flutterwave</span>
+        
         </div>
+        <span style="align-items: center; justify-content: center; display: flex; font-size: 16px; font-weight: bold;">Continue in Flutterwave</span>
+        <span style="align-items: center; justify-content: center; display: flex; margin-top: 10px; font-size: 12px; color: #808080;">Open and contnue in a new browser tab</span>
+    <div style="display: flex; align-items: center;  border: 2px solid #243140; justify-content: center; margin-top: 10px; cursor: pointer; border-radius: 20px; background-color: #1e1e1e; padding: 10px; width: 50px; margin-left: auto; margin-right: auto;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+  <path fill="none" stroke="#05a6db" stroke-width="2" d="m16.289 7.208l-9.766 9.746q-.14.14-.344.13q-.204-.009-.345-.15t-.14-.334t.14-.334L15.582 6.5H6.789q-.213 0-.357-.144t-.143-.357t.143-.356t.357-.143h9.692q.343 0 .575.232t.233.576V16q0 .213-.145.356t-.356.144t-.356-.144t-.144-.356z"/>
+</svg>
+
+  <span style="color: #05a6db; font-size: 14px; font-weight: bold; margin-left: 2px;">Open</span>
+</div>
+
+   
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer;">  
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
+      <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
+          <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
+          <path d="M21 13c0 3.771 0 5.657-1.172 6.828S16.771 21 13 21h-2c-3.771 0-5.657 0-6.828-1.172S3 16.771 3 13v-2c0-3.771 0-5.657 1.172-6.828S7.229 3 11 3"/>
+      </g>
+  </svg>
+  <span style="color: #dbdad5; font-size: 10px;">Copy Link</span>
+  
   </div>
+        </div>
 
   <div class="modal-selected-option-interswitch" style="display: none; transition: opacity 0.5s ease; opacity: 0;">
-      <div class="gateway-option">
+      <div class="current-gateway-option">  
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkNWwt9RAQJUvsPS-mk3XZZay_U4zgBbc9fQ&s" alt="Interswitch" />
-          <span>Interswitch</span>
+        
         </div>
+        <span style="align-items: center; justify-content: center; display: flex; font-size: 16px; font-weight: bold;">Continue in Interswitch</span>
+        <span style="align-items: center; justify-content: center; display: flex; margin-top: 10px; font-size: 12px; color: #808080;">Open and contnue in a new browser tab</span>
+     <div style="display: flex; align-items: center;  border: 2px solid #243140; justify-content: center; margin-top: 10px; cursor: pointer; border-radius: 20px; background-color: #1e1e1e; padding: 10px; width: 50px; margin-left: auto; margin-right: auto;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+  <path fill="none" stroke="#05a6db" stroke-width="2" d="m16.289 7.208l-9.766 9.746q-.14.14-.344.13q-.204-.009-.345-.15t-.14-.334t.14-.334L15.582 6.5H6.789q-.213 0-.357-.144t-.143-.357t.143-.356t.357-.143h9.692q.343 0 .575.232t.233.576V16q0 .213-.145.356t-.356.144t-.356-.144t-.144-.356z"/>
+</svg>
+
+  <span style="color: #05a6db; font-size: 14px; font-weight: bold; margin-left: 2px;">Open</span>
+</div>
+
+    
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer;">  
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
+      <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
+          <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
+          <path d="M21 13c0 3.771 0 5.657-1.172 6.828S16.771 21 13 21h-2c-3.771 0-5.657 0-6.828-1.172S3 16.771 3 13v-2c0-3.771 0-5.657 1.172-6.828S7.229 3 11 3"/>
+      </g>
+  </svg>
+  <span style="color: #dbdad5; font-size: 10px;">Copy Link</span>
+  
   </div>
+        </div>
   
  
   
@@ -446,17 +512,17 @@ onPaymentFailure(callback) {
         });
 
          m.querySelector(".selected-option-paystack").addEventListener("click", () => {
-            this.switchPage(m, "Continue with Paystack", false, ".modal-selected-option-paystack");
+            this.switchPage(m, "Paystack", false, ".modal-selected-option-paystack");
             this.selectWallet("Paystack");
         });
 
         m.querySelector(".selected-option-flutterwave").addEventListener("click", () => {
-            this.switchPage(m, "Continue with Flutterwave", false, ".modal-selected-option-flutterwave");
+            this.switchPage(m, "Flutterwave", false, ".modal-selected-option-flutterwave");
             this.selectWallet("Flutterwave");
         });
 
         m.querySelector(".selected-option-interswitch").addEventListener("click", () => {
-            this.switchPage(m, "Continue with Interswitch", false, ".modal-selected-option-interswitch");
+            this.switchPage(m, "Interswitch", false, ".modal-selected-option-interswitch");
             this.selectWallet("Interswitch");
         });
 
@@ -586,6 +652,28 @@ onPaymentFailure(callback) {
   background-color: #252626;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.3)
   }
+  
+.current-gateway-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 10px 10px 10px;
+  border-radius: 10px;
+  margin: 5px auto 5px; /* Adjust margin to center horizontally */
+  cursor: pointer;
+  width: 20%;
+  text-align: center;
+}
+
+.current-gateway-option img {
+  width: 65px;
+  height: 65px;
+  border-radius: 30px; /* This was duplicated, but left at 20px for roundness */
+  border: 4px solid #243140;
+  padding: 5px;
+}
+
+  
   
   
   .clay-modal {

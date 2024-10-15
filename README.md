@@ -1,4 +1,4 @@
-# Clay InlineJS - Payment Integration Library
+# ClayHQ: One Code, All Payments — Simplifying Integration for Developers
 
 [![NPM Downloads](https://img.shields.io/npm/dw/@paywithclay/inline-js)](https://www.npmjs.com/package/@paywithclay/inline-js)
 [![License](https://img.shields.io/npm/l/@paywithclay/inline-js)](LICENSE)
