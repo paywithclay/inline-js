@@ -5,7 +5,7 @@ class Clay {
             currency: c,
             publicKey: k,
             mode,
-            baseUrl: 'https://monkey-oliver-project-vatican.trycloudflare.com/pay'
+            baseUrl: 'https://endorsed-helped-are-telephone.trycloudflare.com/pay'
         });
         this.key = this.generateEventId();
         this.gestureController = new GestureController();
