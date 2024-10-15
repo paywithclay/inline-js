@@ -21,10 +21,22 @@
     "payments",
     "ecommerce",
     "developer",
-    "inline"
+    "inline",
+    "clay",
+    "paywithclay",
+    "clay-payment",
+    "clay-inline-js",
+    "clay-inline-sdk",
+    "clay-inline-sdk-js",
+    "clay-inline-sdk-javascript",
+    "clay-inline-sdk-payment",
+    "clay-inline-sdk-payment-gateway",
+    "clay-inline-sdk-payment-gateway-javascript",
+    "clay-inline-sdk-payment-gateway-sdk",
+    "clay-inline-sdk-payment-gateway-sdk-javascript"
   ],
   "author": "Favour Afula",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/paywithclay/inline-js/issues"
   },
