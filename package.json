@@ -36,7 +36,7 @@
     "clay-inline-sdk-payment-gateway-sdk-javascript"
   ],
   "author": "Favour Afula",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/paywithclay/inline-js/issues"
   },
