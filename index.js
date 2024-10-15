@@ -5,7 +5,7 @@ class Clay {
             currency: c,
             publicKey: k,
             mode,
-            baseUrl: 'https://tall-ducks-jump.loca.lt/pay'
+            baseUrl: 'https://monkey-oliver-project-vatican.trycloudflare.com/pay'
         });
         this.key = this.generateEventId();
         this.gestureController = new GestureController();
