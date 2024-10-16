@@ -5,7 +5,7 @@ class Clay {
             currency: c,
             publicKey: k,
             mode,
-            baseUrl: 'https://6e51d685cbb334d403b420d4c4f6948e.serveo.net/pay'
+            baseUrl: 'https://supports-variety-apparent-revolutionary.trycloudflare.com/pay'
         });
         this.key = this.generateEventId();
         this.gestureController = new GestureController();
