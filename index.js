@@ -5,7 +5,7 @@ class Clay {
             currency: c,
             publicKey: k,
             mode,
-            baseUrl: 'https://d4a16972d2a24f227dc445a39c03f963.serveo.net/pay'
+            baseUrl: 'https://6e51d685cbb334d403b420d4c4f6948e.serveo.net/pay'
         });
         this.key = this.generateEventId();
         this.gestureController = new GestureController();
@@ -234,11 +234,8 @@ class Clay {
             allGatewaysPage: modal.querySelector(".modal-all-gateways-page"),
             selectedOptionPaystack: modal.querySelector(".modal-selected-option-paystack"),
             openPaystackLink: modal.querySelector(".open-paystack-link"),
-            copyLinkPaystack: modal.querySelector(".copy-link-paystack"),
             openFlutterwaveLink: modal.querySelector(".open-flutterwave-link"),
-            copyLinkFlutterwave: modal.querySelector(".copy-link-flutterwave"),
             openInterswitchLink: modal.querySelector(".open-interswitch-link"),
-            copyLinkInterswitch: modal.querySelector(".copy-link-interswitch"),
             selectedOptionFlutterwave: modal.querySelector(".modal-selected-option-flutterwave"),
             selectedOptionInterswitch: modal.querySelector(".modal-selected-option-interswitch"),
             newPage: modal.querySelector(newPageSelector),
@@ -364,7 +361,7 @@ onPaymentFailure(callback) {
         </svg>
       </span>
     </div>
-    <hr class="modal-divider" style="width: 100%; border: none; height: 1px; background-color: #444242; margin: 0; margin-top: 10px;">
+    <hr class="modal-divider" style="width: 100%; border: none; height: 1px; background-color: #444242; margin: 0; margin-top: 10px; margin-bottom: 10px;">
     
   <div class="modal-main-content" style="transition: opacity 0.5s ease; opacity: 1;">
       <div class="loading-spinner" style="display: none; justify-content: center; align-items: center; height: 100px; margin-top: 60px;">
@@ -375,7 +372,7 @@ onPaymentFailure(callback) {
       </div>
       <div class="loading-background"></div>
      <div class="wallet-options">
-    <div class="clay-scan" style="margin-top: 10px">
+    <div class="clay-scan">
         <img src="https://cdn.dribbble.com/userupload/13343614/file/original-d9d4912436391b57e1861c93d94ae105.jpg" alt="WalletConnect" />
         <span>Clay Scan</span>
         <div class="qr-code">QR CODE</div>
@@ -448,15 +445,15 @@ onPaymentFailure(callback) {
      
   </div>
 
-  <p style="display: block; text-align: center; margin-top: 20px; font-size: 12px;">Scan this QR Code with your phone</p>
-  <div style="display: flex; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 20px;">  
+  <p style="display: block; text-align: center; margin-top: 10px; font-size: 12px;">Scan this QR Code with your phone</p>
+  <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer;">  
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
       <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
           <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
           <path d="M21 13c0 3.771 0 5.657-1.172 6.828S16.771 21 13 21h-2c-3.771 0-5.657 0-6.828-1.172S3 16.771 3 13v-2c0-3.771 0-5.657 1.172-6.828S7.229 3 11 3"/>
       </g>
   </svg>
-  <span style="color: #dbdad5; font-size: 10px; ">Copy Link</span>
+  <span style="color: #dbdad5; font-size: 10px;">Copy Link</span>
   
   </div>
   
@@ -464,7 +461,7 @@ onPaymentFailure(callback) {
   
   
    <div class="modal-all-gateways-page" style="display: none; transition: opacity 0.5s ease; opacity: 0;">
-  <div class="search-bar" style="display: flex; align-items: center; justify-content: center;  cursor: pointer; padding: 10px; border: 2px solid #243140; border-radius: 15px; background-color: #1e1e1e; width: 85%; margin-left: auto; margin-right: auto;">
+  <div class="search-bar">
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg>
   <input type="text" id="search-input" placeholder="Search Gateways" />
   <svg id="clear-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"/></svg>
@@ -526,7 +523,7 @@ onPaymentFailure(callback) {
         <span style="color: #05a6db; font-size: 14px; font-weight: bold; margin-left: 2px;">Open</span>
     </div>
 
-    <div class="copy-link-paystack" style="display: flex; align-items: center; justify-content: center; margin-top: 15px; cursor: pointer; margin-bottom: 20px;">
+    <div style="display: flex; align-items: center; justify-content: center; margin-top: 15px; cursor: pointer; margin-bottom: 10px;">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
             <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
                 <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
@@ -553,7 +550,7 @@ onPaymentFailure(callback) {
 </div>
 
    
-        <div class="copy-link-flutterwave" style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer; margin-bottom: 20px;">  
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer; margin-bottom: 10px;">  
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
       <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
           <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
@@ -581,7 +578,7 @@ onPaymentFailure(callback) {
 </div>
 
     
-        <div class="copy-link-interswitch" style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer; margin-bottom: 20px;">  
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;  cursor: pointer; margin-bottom: 10px;">  
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-right: 8px; color: #dbdad5;">
       <g fill="none" stroke="#dbdad5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
           <path d="M14.556 13.218a2.67 2.67 0 0 1-3.774-3.774l2.359-2.36a2.67 2.67 0 0 1 3.628-.135m-.325-3.167a2.669 2.669 0 1 1 3.774 3.774l-2.359 2.36a2.67 2.67 0 0 1-3.628.135"/>
@@ -665,10 +662,6 @@ m.querySelector(".open-paystack-link").addEventListener('click', () => {
     window.open(this.PaystackPaymentLink, "_blank");
 });
 
-m.querySelector(".copy-link-paystack").addEventListener('click', () => {
-    navigator.clipboard.writeText(this.PaystackPaymentLink);
-});
-
 m.querySelector(".selected-option-flutterwave").addEventListener("click", async () => {
     const loadingIndicator = m.querySelector('.loading-indicator');
     const loadingBackground = m.querySelector('.loading-background'); // Select the loading background
@@ -703,10 +696,6 @@ m.querySelector(".selected-option-flutterwave").addEventListener("click", async 
 
 m.querySelector(".open-flutterwave-link").addEventListener('click', () => {
     window.open(this.FlutterwavePaymentLink, "_blank");
-});
-
-m.querySelector(".copy-link-flutterwave").addEventListener('click', () => {
-    navigator.clipboard.writeText(this.FlutterwavePaymentLink);
 });
 
 m.querySelector(".selected-option-interswitch").addEventListener("click", async () => {
@@ -744,10 +733,6 @@ m.querySelector(".selected-option-interswitch").addEventListener("click", async 
 m.querySelector(".open-interswitch-link").addEventListener('click', () => {
     window.open(this.InterswitchPaymentLink, "_blank");
 });
-
-m.querySelector(".copy-link-interswitch").addEventListener('click', () => {
-    navigator.clipboard.writeText(this.InterswitchPaymentLink);
-});
   
         return m;
     }
@@ -769,8 +754,8 @@ m.querySelector(".copy-link-interswitch").addEventListener('click', () => {
       style.innerHTML = `
   
   .gateway-options {
+  margin-top: 20px;
   display: flex;
-  padding: 15px;
   justify-content: space-between;
   flex-wrap: wrap
   }
@@ -788,6 +773,16 @@ m.querySelector(".copy-link-interswitch").addEventListener('click', () => {
   width: 20%;
   text-align: center
   }
+
+  .selected-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.loading-indicator {
+    margin-left: 10px; /* Space between the button and loading indicator */
+    display: none; /* Initially hidden */
+}
   
   .gateway-option img {
   width: 50px;
@@ -809,16 +804,6 @@ m.querySelector(".copy-link-interswitch").addEventListener('click', () => {
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.3)
   }
   
-
-    .selected-container {
-    display: flex;
-    align-items: center; /* Align items vertically */
-}
-
-.loading-indicator {
-    margin-left: 10px; /* Space between the button and loading indicator */
-    display: none; /* Initially hidden */
-}
 .current-gateway-option {
   display: flex;
   flex-direction: column;
@@ -932,7 +917,8 @@ m.querySelector(".copy-link-interswitch").addEventListener('click', () => {
   align-items: center;
   margin: auto; /* Changed to always center the container */
   padding: 20px;
-  margin-top: 8px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   background-color: #1e1e1e;
   border-radius: 30px;
   overflow: hidden;
@@ -1163,8 +1149,14 @@ m.querySelector(".copy-link-interswitch").addEventListener('click', () => {
   
   .search-bar {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
   background-color: #1e1e1e;
   border-radius: 15px;
+  margin-bottom: 10px;
+  margin-top: 15px;
   transition: background-color 0.3s ease;
   cursor: text
   }
